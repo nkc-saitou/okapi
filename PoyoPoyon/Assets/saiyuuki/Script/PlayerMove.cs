@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
     //-------------------------------------
 
     const float FLICK_DIRECTION = 100; //フリックする距離
+    const float FLICK_MOVE = 5.0f;
 
     //-------------------------------------
     // public
@@ -25,21 +26,28 @@ public class PlayerMove : MonoBehaviour
     Ray ray;
     RaycastHit2D hit;
 
-    //List<GameObject> touchObj = new List<GameObject>();
-    GameObject[] touchObj = new GameObject[10];
+    GameObject[] touchObj = new GameObject[10]; //タッチしたオブジェクトの配列(指10)
     GameObject clickObj;
 
-    Vector3[] soldierStartPos = new Vector3[2]; //初期位置
     Vector3 clickPos;
+    Vector2[] startSoldierPos = new Vector2[2];
+
     float clickStartPos;
     float clickEndPos;
 
+    bool[] FlickFlg = new bool[2]; //0がRight,1がLeft
+
     ClickState clickState = 0;
+
+    //////////////////////////////////////////////////////////////////////
 
     void Start()
     {
-        soldierStartPos[0] = soldier[0].transform.position;
-        soldierStartPos[1] = soldier[1].transform.position;
+        for(int i = 0; i<FlickFlg.Length; i++)
+        {
+            FlickFlg[i] = false;
+            startSoldierPos[i] = soldier[i].transform.position;
+        }
     }
 
     void Update()
@@ -80,6 +88,7 @@ public class PlayerMove : MonoBehaviour
                     MouseDrag();
                     break;
             }
+            FlickSoldierMove();
         }
     }
 
@@ -94,7 +103,7 @@ public class PlayerMove : MonoBehaviour
         //rayの衝突判定
         hit = Physics2D.Raycast(ray.origin, ray.direction);
 
-        if(hit.collider.tag == "rPlayer" || hit.collider.tag == "lPlayer")
+        if (hit.collider.tag == "rPlayer" || hit.collider.tag == "lPlayer")
         {
             touchObj[t.fingerId] = hit.collider.gameObject;
         }
@@ -119,6 +128,7 @@ public class PlayerMove : MonoBehaviour
 
     void TouchEnd(Touch t)
     {
+        //タッチを離したfingerId番目の配列をnullにする
         touchObj[t.fingerId] = null;
     }
 
@@ -135,11 +145,13 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && hit.collider)
         {
+            //フリック用のクリック開始位置を保存
+            clickStartPos = Input.mousePosition.x;
+
+            Debug.Log(clickStartPos);
+
             //rayが当たったオブジェクトを保存
             clickObj = hit.collider.gameObject;
-
-            clickStartPos = Input.mousePosition.x;
-            Debug.Log("OK");
 
             //状態をドラッグに
             clickState = ClickState.Drag;
@@ -148,9 +160,9 @@ public class PlayerMove : MonoBehaviour
 
     void MouseDrag()
     {
-        if (Input.GetMouseButton(0))
+        for (int soldierNo = 0; soldierNo < 2; soldierNo++)
         {
-            for (int soldierNo = 0; soldierNo < 2; soldierNo++)
+            if (Input.GetMouseButton(0))
             {
                 clickPos = Input.mousePosition;
                 clickPos.z = 10;
@@ -159,47 +171,60 @@ public class PlayerMove : MonoBehaviour
                 {
                     //クリックした位置へ移動させる
                     Vector3 soilderPos = Camera.main.ScreenToWorldPoint(clickPos);
-                    soilderPos.x = soldierStartPos[soldierNo].x;
+                    soilderPos.x = clickObj.transform.position.x;
                     soldier[soldierNo].transform.localPosition = soilderPos;
                 }
             }
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            //状態をクリック待ちにする
-            clickState = ClickState.Click;
+            else if (Input.GetMouseButtonUp(0))
+            {
+                //状態をクリック待ちにする
+                clickState = ClickState.Click;
 
-            clickEndPos = Input.mousePosition.x;
-            GetDirection();
-        }
-    }
-
-    void GetDirection()
-    {
-        float dir = clickEndPos - clickStartPos;
-        Debug.Log(dir);
-
-        //右フリック
-        if(FLICK_DIRECTION < dir)
-        {
-            //LeftObjがRightObjの方にいく処理
-            
-            Debug.Log("Right");
-        }
-        //左フリック
-        else if(-FLICK_DIRECTION > dir)
-        {
-            //RightObjがLeftObjの方に行く処理
-
-            Debug.Log("Left");
+                //フリック用のクリック終了位置を保存
+                clickEndPos = Input.mousePosition.x;
+                GetDirection();
+            }
         }
     }
-
 
     enum ClickState
     {
         Click = 0,
         Drag
+    }
+
+    //-----------------------------------------------------------
+    // フリック用の処理
+    //-----------------------------------------------------------
+
+    void GetDirection()
+    {
+        float dis = clickEndPos - clickStartPos;
+
+        //右フリック
+        if (FLICK_DIRECTION < dis)
+        {
+            FlickFlg[0] = true;
+        }
+        //左フリック
+        else if (-FLICK_DIRECTION > dis)
+        {
+            FlickFlg[1] = true;
+        }
+    }
+
+    void FlickSoldierMove()
+    {
+        //右フリック移動処理
+        if (FlickFlg[0])
+        {
+            soldier[1].transform.position = Vector2.MoveTowards(soldier[1].transform.position, soldier[0].transform.position, FLICK_MOVE * Time.deltaTime);
+        }
+        //左フリック移動処理
+        if (FlickFlg[1])
+        {
+            soldier[0].transform.position = Vector2.MoveTowards(soldier[0].transform.position, soldier[1].transform.position, FLICK_MOVE * Time.deltaTime);
+        }
     }
 
     void TouchTest()
