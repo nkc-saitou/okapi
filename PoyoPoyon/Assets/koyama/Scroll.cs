@@ -13,7 +13,7 @@ public class Scroll : MonoBehaviour{
     //--------------------------------------
     // public
     //--------------------------------------
-
+    [SerializeField,Range(0,0.04f)]
     public float speed = 0.04f;
     public GameObject[] stage;
 	

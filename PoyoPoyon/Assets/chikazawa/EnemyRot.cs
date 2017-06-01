@@ -10,7 +10,7 @@ public class EnemyRot : MonoBehaviour
     public bool swichtarget = false;
     public Transform target; // 追いかける対象
 
-    Vector3 eWpos;
+    //Vector3 eWpos;
 
     // Use this for initialization
     void Start()
@@ -22,18 +22,15 @@ public class EnemyRot : MonoBehaviour
 
     void Update()
     {
-        transform.position = eWpos;
         Vector3 p2 = target.position;
         Vector3 p1 = transform.position;
         if (swichtarget == false)
         {
             target = playerL;
-            eWpos = new Vector3(-0.5f, 1.0f, 0);
         }
         else
         {
             target = playerR;
-            eWpos = new Vector3(0.5f, 1.0f, 0);
         }
         float dx = p2.x - p1.x;
         float dy = p2.y - p1.y;
