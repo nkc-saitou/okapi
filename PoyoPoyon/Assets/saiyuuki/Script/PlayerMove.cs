@@ -17,7 +17,7 @@ public class PlayerMove : MonoBehaviour
     //-------------------------------------
 
     public GameObject[] soldier = new GameObject[2]; //0がRight,1がLeft
-    public Text test;
+    
 
     //-------------------------------------
     // private
@@ -235,6 +235,6 @@ public class PlayerMove : MonoBehaviour
         {
             result += string.Format("{0} touchPos : {1} , fingerId : {2} \r\n", i, Input.touches[i].position, Input.touches[i].fingerId);
         }
-        test.text = result;
+       
     }
 }
