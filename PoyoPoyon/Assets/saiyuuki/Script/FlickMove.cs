@@ -63,6 +63,7 @@ public class FlickMove : MonoBehaviour {
         if (flickFlg[0])
         {
             soldier[1].transform.position = Vector2.MoveTowards(soldier[1].transform.position, soldier[0].transform.position, SOLDIER_MOVE);
+
         }
         //左フリック移動
         if(flickFlg[1])

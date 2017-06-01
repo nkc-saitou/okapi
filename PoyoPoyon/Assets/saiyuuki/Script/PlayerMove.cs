@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour
     //-------------------------------------
 
     const float FLICK_DIRECTION = 100; //フリックする距離
-    const float FLICK_MOVE = 5.0f;
+    const float FLICK_MOVE = 1.0f;
 
     //-------------------------------------
     // public
@@ -18,6 +18,9 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject[] soldier = new GameObject[2]; //0がRight,1がLeft
     public Text test;
+
+
+    public static bool[] FlickFlg = new bool[2]; //0がRight,1がLeft
 
     //-------------------------------------
     // private
@@ -31,11 +34,10 @@ public class PlayerMove : MonoBehaviour
 
     Vector3 clickPos;
     Vector2[] startSoldierPos = new Vector2[2];
+    Vector2[] soldierReturnPos = new Vector2[2];
 
     float clickStartPos;
     float clickEndPos;
-
-    bool[] FlickFlg = new bool[2]; //0がRight,1がLeft
 
     ClickState clickState = 0;
 
@@ -148,8 +150,6 @@ public class PlayerMove : MonoBehaviour
             //フリック用のクリック開始位置を保存
             clickStartPos = Input.mousePosition.x;
 
-            Debug.Log(clickStartPos);
-
             //rayが当たったオブジェクトを保存
             clickObj = hit.collider.gameObject;
 
@@ -205,11 +205,13 @@ public class PlayerMove : MonoBehaviour
         if (FLICK_DIRECTION < dis)
         {
             FlickFlg[0] = true;
+            soldierReturnPos[1] = soldier[1].transform.position;
         }
         //左フリック
         else if (-FLICK_DIRECTION > dis)
         {
             FlickFlg[1] = true;
+            soldierReturnPos[0] = soldier[0].transform.position;
         }
     }
 
@@ -218,14 +220,29 @@ public class PlayerMove : MonoBehaviour
         //右フリック移動処理
         if (FlickFlg[0])
         {
-            soldier[1].transform.position = Vector2.MoveTowards(soldier[1].transform.position, soldier[0].transform.position, FLICK_MOVE * Time.deltaTime);
+            soldier[1].transform.position = Vector2.Lerp(soldier[1].transform.position, soldier[0].transform.position, FLICK_MOVE * Time.deltaTime);
         }
         //左フリック移動処理
         if (FlickFlg[1])
         {
-            soldier[0].transform.position = Vector2.MoveTowards(soldier[0].transform.position, soldier[1].transform.position, FLICK_MOVE * Time.deltaTime);
+            soldier[0].transform.position = Vector2.Lerp(soldier[0].transform.position, soldier[1].transform.position, FLICK_MOVE * Time.deltaTime);
         }
     }
+    
+    ////--------------------------------------------
+    //// プロパティ
+    ////--------------------------------------------
+    //public Vector2 SoldierReturnPos_Left
+    //{
+    //    get { return soldierReturnPos[1]; }
+    //    set { soldierReturnPos[1] = value; }
+    //}
+
+    //public Vector2 SoldierReturnPos_Right
+    //{
+    //    get { return soldierReturnPos[0]; }
+    //    set { soldierReturnPos[0] = value; }
+    //}
 
     void TouchTest()
     {
