@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:PoyoPoyon/Assets/fadeinout/Script.meta
 guid: 2977fd7e69f3f044facdb70ec6f30daa
 folderAsset: yes
 timeCreated: 1493357133
+=======
+guid: 1ee78f57b5b213041984d23569aaf7ad
+folderAsset: yes
+timeCreated: 1495516239
+>>>>>>> origin/nakashima:PoyoPoyon/Assets/nakashima.meta
 licenseType: Free
 DefaultImporter:
   userData: 
