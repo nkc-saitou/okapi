@@ -1,0 +1,2 @@
+１、Prefabsに入っているprefabをfadeinoutさせたいsceneにドロップ
+２、フォルダーScript下にあるfadesampleをボタンにアタッチ
