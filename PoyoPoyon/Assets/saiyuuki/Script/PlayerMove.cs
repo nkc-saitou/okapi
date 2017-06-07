@@ -10,17 +10,18 @@ public class PlayerMove : MonoBehaviour
     //-------------------------------------
 
     const float FLICK_DIRECTION = 100; //フリックする距離
-    const float FLICK_MOVE = 1.0f;
+    const float FLICK_MOVE = 1.5f;
 
     //-------------------------------------
     // public
     //-------------------------------------
 
     public GameObject[] soldier = new GameObject[2]; //0がRight,1がLeft
+
     public Text test;
 
-
     public static bool[] FlickFlg = new bool[2]; //0がRight,1がLeft
+    public static bool[] flickController = new bool[2];
 
     //-------------------------------------
     // private
@@ -35,9 +36,12 @@ public class PlayerMove : MonoBehaviour
     Vector3 clickPos;
     Vector2[] startSoldierPos = new Vector2[2];
     Vector2[] soldierReturnPos = new Vector2[2];
+    Vector2[] touchStartPos = new Vector2[2];
+    Vector2[] touchEndPos = new Vector2[2];
 
     float clickStartPos;
     float clickEndPos;
+    float[] dis = new float[2];
 
     ClickState clickState = 0;
 
@@ -49,12 +53,13 @@ public class PlayerMove : MonoBehaviour
         {
             FlickFlg[i] = false;
             startSoldierPos[i] = soldier[i].transform.position;
+            flickController[i] = true;
         }
     }
 
     void Update()
     {
-        TouchTest();
+        //TouchTest();
         if (Input.touchSupported)
         {
             foreach (Touch t in Input.touches)
@@ -90,8 +95,8 @@ public class PlayerMove : MonoBehaviour
                     MouseDrag();
                     break;
             }
-            FlickSoldierMove();
         }
+        FlickSoldierMove();
     }
 
     //--------------------------------------------
@@ -107,6 +112,7 @@ public class PlayerMove : MonoBehaviour
 
         if (hit.collider.tag == "rPlayer" || hit.collider.tag == "lPlayer")
         {
+            touchStartPos[t.fingerId] = t.position;
             touchObj[t.fingerId] = hit.collider.gameObject;
         }
     }
@@ -132,6 +138,27 @@ public class PlayerMove : MonoBehaviour
     {
         //タッチを離したfingerId番目の配列をnullにする
         touchObj[t.fingerId] = null;
+
+        touchEndPos[t.fingerId] = t.position;
+        GetDirection(t);
+    }
+
+    void GetDirection(Touch t)
+    {
+        dis[t.fingerId] = touchEndPos[t.fingerId].x - touchStartPos[t.fingerId].x;
+        //test.text = "dis" + dis.ToString();
+        //右フリック(LeftObjが右へ移動)
+        if (FLICK_DIRECTION < dis[t.fingerId] && flickController[1])
+        {
+            FlickFlg[0] = true;
+            soldierReturnPos[1] = soldier[1].transform.position;
+        }
+        //左フリック(RightObjが左へ移動)
+        else if (-FLICK_DIRECTION > dis[t.fingerId] && flickController[0])
+        {
+            FlickFlg[1] = true;
+            soldierReturnPos[0] = soldier[0].transform.position;
+        }
     }
 
     //--------------------------------------------
@@ -193,27 +220,26 @@ public class PlayerMove : MonoBehaviour
         Drag
     }
 
-    //-----------------------------------------------------------
-    // フリック用の処理
-    //-----------------------------------------------------------
-
     void GetDirection()
     {
         float dis = clickEndPos - clickStartPos;
-
         //右フリック
-        if (FLICK_DIRECTION < dis)
+        if (FLICK_DIRECTION < dis && flickController[1])
         {
             FlickFlg[0] = true;
             soldierReturnPos[1] = soldier[1].transform.position;
         }
         //左フリック
-        else if (-FLICK_DIRECTION > dis)
+        else if (-FLICK_DIRECTION > dis && flickController[0])
         {
             FlickFlg[1] = true;
             soldierReturnPos[0] = soldier[0].transform.position;
         }
     }
+
+    //-----------------------------------------------------------
+    // フリック用の処理
+    //-----------------------------------------------------------
 
     void FlickSoldierMove()
     {
@@ -227,31 +253,5 @@ public class PlayerMove : MonoBehaviour
         {
             soldier[0].transform.position = Vector2.Lerp(soldier[0].transform.position, soldier[1].transform.position, FLICK_MOVE * Time.deltaTime);
         }
-    }
-    
-    ////--------------------------------------------
-    //// プロパティ
-    ////--------------------------------------------
-    //public Vector2 SoldierReturnPos_Left
-    //{
-    //    get { return soldierReturnPos[1]; }
-    //    set { soldierReturnPos[1] = value; }
-    //}
-
-    //public Vector2 SoldierReturnPos_Right
-    //{
-    //    get { return soldierReturnPos[0]; }
-    //    set { soldierReturnPos[0] = value; }
-    //}
-
-    void TouchTest()
-    {
-        string result = "";
-        result += string.Format("touchCount : {0}\r\n", Input.touchCount);
-        for (int i = 0; i < Input.touchCount; i++)
-        {
-            result += string.Format("{0} touchPos : {1} , fingerId : {2} \r\n", i, Input.touches[i].position, Input.touches[i].fingerId);
-        }
-        test.text = result;
     }
 }

@@ -8,13 +8,11 @@ public class playerFlg : MonoBehaviour {
     // 定数
     //--------------------------------------------------
 
-    const float RETURN_SOLDIER = 2.0f;
+    const float RETURN_SOLDIER = 1.8f;
 
     //--------------------------------------------------
     // public
     //--------------------------------------------------
-
-    public int soldierNo;
 
     public static bool[] soldierFlg = new bool[2];
 
@@ -24,25 +22,18 @@ public class playerFlg : MonoBehaviour {
 
     bool waitFlg = true;
 
-    float time = 1;
-    float startTime;
-    float rate;
-
-    [SerializeField]
-    Vector2 endPos;
-
     Vector2 startPos;
     Vector2 soldierReturnPos;
+
+    [SerializeField]
+    int soldierNo;
+
+
 
     void Start()
     {
         soldierReturnPos = transform.parent.position;
-        
-        //フラグをfalseに
-        for (int i = 0; i< soldierFlg.Length; i++)
-        {
-            soldierFlg[i] = false;
-        }
+        soldierFlg[soldierNo] = false;
     }
 
     void Update()
@@ -56,50 +47,7 @@ public class playerFlg : MonoBehaviour {
         if(soldierFlg[soldierNo])
         {
             transform.parent.position = Vector2.Lerp(transform.parent.position, soldierReturnPos, RETURN_SOLDIER * Time.deltaTime);
-            StartCoroutine(WaitTime());
         }
-        //if(soldierFlg[1])
-        //{
-        //    transform.parent.position = Vector2.Lerp(transform.parent.position, soldierReturnPos, RETURN_SOLDIER * Time.deltaTime);
-        //}
-
-        ////右側のおかっぴきさんが元の位置に戻ったら
-        //if (transform.parent.position.x >= soldierReturnPos.x && soldierNo == 0)
-        //{
-        //    soldierFlg[0] = false;
-        //}
-        ////左側のおかっぴきさんが元の位置に戻ったら
-        //if(transform.parent.position.x <= soldierReturnPos.x && soldierNo == 1)
-        //{
-        //    soldierFlg[1] = false;
-        //}
-
-        //Vector2 soldierPos = transform.parent.position;
-        ////おかっぴきさんが衝突し、フラグがtrueになったとき、元の位置に戻る処理
-        //if (soldierFlg[soldierNo])
-        //{
-        //    if (soldierNo == 0) soldierPos.x += RETURN_SOLDIER * Time.deltaTime;
-        //    if (soldierNo == 1) soldierPos.x -= RETURN_SOLDIER * Time.deltaTime;
-
-        //    transform.parent.position = soldierPos;
-        //}
-
-        ////右側のおかっぴきさんが元の位置より移動しないようにする
-        //if (soldierNo == 0 && soldierPos.x > soldierReturnPos.x)
-        //{
-        //    Vector2 nowPos = transform.parent.position;
-        //    nowPos.x = soldierReturnPos.x;
-        //    transform.parent.position = nowPos;
-        //    soldierFlg[soldierNo] = false;
-        //}
-        ////左側のおかっぴきさんが元の位置より移動しないようにする
-        //if (soldierNo == 1 && soldierPos.x < soldierReturnPos.x)
-        //{
-        //    Vector2 nowPos = transform.parent.position;
-        //    nowPos.x = soldierReturnPos.x;
-        //    transform.parent.position = nowPos;
-        //    soldierFlg[soldierNo] = false;
-        //}
     }
 
     void OnTriggerEnter2D(Collider2D hit)
@@ -107,14 +55,24 @@ public class playerFlg : MonoBehaviour {
         //おかっぴきさんにあたったらフラグをtrueにする
         if(hit.tag == "pl_collider")
         {
-            soldierFlg[soldierNo] = true;
-
-            PlayerMove.FlickFlg[soldierNo] = false; 
+            soldierFlg[soldierNo] = true; //元に戻るフラグ
+            PlayerMove.FlickFlg[soldierNo] = false; //フリック時の移動用フラグ
+            PlayerMove.flickController[soldierNo] = false;
         }
     }
+
+    void OnTriggerStay2D(Collider2D hit)
+    {
+        if (hit.tag == "return_collider")
+        {
+            soldierFlg[soldierNo] = false;
+            StartCoroutine(WaitTime());
+        }
+    }
+
     IEnumerator WaitTime()
     {
-        yield return new WaitForSeconds(2.0f);
-        soldierFlg[soldierNo] = false;
+        yield return new WaitForSeconds(1.0f);
+        PlayerMove.flickController[soldierNo] = true;
     }
 }
