@@ -9,8 +9,8 @@ public class PlayerMove : MonoBehaviour
     // 定数
     //-------------------------------------
 
-    const float FLICK_DIRECTION = 100; //フリックする距離
-    const float FLICK_MOVE = 1.5f;
+    const float FLICK_DIRECTION = 150; //フリックする距離
+    const float FLICK_MOVE = 2.0f;
 
     //-------------------------------------
     // public
@@ -19,9 +19,12 @@ public class PlayerMove : MonoBehaviour
     public GameObject[] soldier = new GameObject[2]; //0がRight,1がLeft
 
     public Text test;
+    public Text test1;
 
     public static bool[] FlickFlg = new bool[2]; //0がRight,1がLeft
     public static bool[] flickController = new bool[2];
+    public static string flickState_R = "upDown";
+    public static string flickState_L = "upDown";
 
     //-------------------------------------
     // private
@@ -39,11 +42,39 @@ public class PlayerMove : MonoBehaviour
     Vector2[] touchStartPos = new Vector2[2];
     Vector2[] touchEndPos = new Vector2[2];
 
-    float clickStartPos;
-    float clickEndPos;
-    float[] dis = new float[2];
+    Vector2 clickStartPos;
+    Vector2 clickEndPos;
+    float[] disX = new float[2];
+    float[] disY = new float[2];
 
     ClickState clickState = 0;
+    //Right_SoldierState rightState = 0;
+
+
+    //enum PlayerState
+    //{
+    //    Idle = 0,
+    //    Move,
+    //    Attack
+    //}
+
+    //enum Right_SoldierState
+    //{
+    //    FlickMove_R = 0,
+    //    ReturnMove_R
+    //}
+
+    //enum Left_SoldierState
+    //{
+    //    FlickMove_L = 0,
+    //    Returnmove_R
+    //}
+
+    enum ClickState
+    {
+        Click = 0,
+        Drag
+    }
 
     //////////////////////////////////////////////////////////////////////
 
@@ -83,6 +114,7 @@ public class PlayerMove : MonoBehaviour
                 }
             }
         }
+
         else
         {
             switch (clickState)
@@ -96,7 +128,7 @@ public class PlayerMove : MonoBehaviour
                     break;
             }
         }
-        FlickSoldierMove();
+        RightSoldierMoveState();
     }
 
     //--------------------------------------------
@@ -110,10 +142,14 @@ public class PlayerMove : MonoBehaviour
         //rayの衝突判定
         hit = Physics2D.Raycast(ray.origin, ray.direction);
 
-        if (hit.collider.tag == "rPlayer" || hit.collider.tag == "lPlayer")
+        if (hit.collider)
         {
-            touchStartPos[t.fingerId] = t.position;
-            touchObj[t.fingerId] = hit.collider.gameObject;
+             touchStartPos[t.fingerId] = t.position;
+
+            if (hit.collider.tag == "rPlayer" || hit.collider.tag == "lPlayer")
+            {
+                touchObj[t.fingerId] = hit.collider.gameObject;
+            }
         }
     }
 
@@ -138,26 +174,42 @@ public class PlayerMove : MonoBehaviour
     {
         //タッチを離したfingerId番目の配列をnullにする
         touchObj[t.fingerId] = null;
-
         touchEndPos[t.fingerId] = t.position;
         GetDirection(t);
     }
 
     void GetDirection(Touch t)
     {
-        dis[t.fingerId] = touchEndPos[t.fingerId].x - touchStartPos[t.fingerId].x;
-        //test.text = "dis" + dis.ToString();
-        //右フリック(LeftObjが右へ移動)
-        if (FLICK_DIRECTION < dis[t.fingerId] && flickController[1])
+        disX[t.fingerId] = touchEndPos[t.fingerId].x - touchStartPos[t.fingerId].x;
+        disY[t.fingerId] = touchEndPos[t.fingerId].y - touchStartPos[t.fingerId].y;
+
+        if (Mathf.Abs(disY[t.fingerId]) < Mathf.Abs(disX[t.fingerId]))
         {
-            FlickFlg[0] = true;
-            soldierReturnPos[1] = soldier[1].transform.position;
+            //右フリック(LeftObjが右へ移動)
+            if (FLICK_DIRECTION < disX[t.fingerId])
+            {
+                soldierReturnPos[1] = soldier[1].transform.position;
+                soldierReturnPos[1].x = startSoldierPos[1].x;
+                flickState_L = "flickMove";
+            }
+            //左フリック(RightObjが左へ移動)
+            else if (-FLICK_DIRECTION > disX[t.fingerId])
+            {
+                soldierReturnPos[0] = soldier[0].transform.position;
+                soldierReturnPos[0].x = startSoldierPos[0].x;
+                flickState_R = "flickMove";
+            }
         }
-        //左フリック(RightObjが左へ移動)
-        else if (-FLICK_DIRECTION > dis[t.fingerId] && flickController[0])
+        else if(Mathf.Abs(disX[t.fingerId]) < Mathf.Abs(disY[t.fingerId]))
         {
-            FlickFlg[1] = true;
-            soldierReturnPos[0] = soldier[0].transform.position;
+            if(hit.collider.tag == "rPlayer")
+            {
+                flickState_R = "upDown";
+            }
+            if(hit.collider.tag == "lPlayer")
+            {
+                flickState_L = "upDown";
+            }
         }
     }
 
@@ -175,7 +227,7 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && hit.collider)
         {
             //フリック用のクリック開始位置を保存
-            clickStartPos = Input.mousePosition.x;
+            clickStartPos = Input.mousePosition;
 
             //rayが当たったオブジェクトを保存
             clickObj = hit.collider.gameObject;
@@ -208,50 +260,96 @@ public class PlayerMove : MonoBehaviour
                 clickState = ClickState.Click;
 
                 //フリック用のクリック終了位置を保存
-                clickEndPos = Input.mousePosition.x;
+                clickEndPos = Input.mousePosition;
                 GetDirection();
             }
         }
     }
 
-    enum ClickState
-    {
-        Click = 0,
-        Drag
-    }
-
     void GetDirection()
     {
-        float dis = clickEndPos - clickStartPos;
-        //右フリック
-        if (FLICK_DIRECTION < dis && flickController[1])
+        float disX = clickEndPos.x - clickStartPos.x;
+        float disY = clickEndPos.y - clickStartPos.y;
+
+        if (Mathf.Abs(disY) < Mathf.Abs(disX))
         {
-            FlickFlg[0] = true;
-            soldierReturnPos[1] = soldier[1].transform.position;
+            //右フリック
+            if (FLICK_DIRECTION < disX)
+            {
+                soldierReturnPos[1] = soldier[1].transform.position;
+                soldierReturnPos[1].x = startSoldierPos[1].x;
+                flickState_L = "flickMove";
+
+            }
+            //左フリック
+            else if (-FLICK_DIRECTION > disX)
+            {
+                soldierReturnPos[0] = soldier[0].transform.position;
+                soldierReturnPos[0].x = startSoldierPos[0].x;
+                flickState_R = "flickMove";
+            }
         }
-        //左フリック
-        else if (-FLICK_DIRECTION > dis && flickController[0])
+        else if(Mathf.Abs(disX) < Mathf.Abs(disY))
         {
-            FlickFlg[1] = true;
-            soldierReturnPos[0] = soldier[0].transform.position;
+            if(clickObj == soldier[0])
+            {
+                flickState_R = "upDown";
+            }
+
+            if(clickObj == soldier[1])
+            {
+                flickState_L = "upDown";
+            }
         }
     }
 
-    //-----------------------------------------------------------
-    // フリック用の処理
-    //-----------------------------------------------------------
+    //--------------------------------------------------
+    // フリック移動
+    //--------------------------------------------------
 
-    void FlickSoldierMove()
+    void RightSoldierMoveState()
     {
-        //右フリック移動処理
-        if (FlickFlg[0])
+        switch (flickState_R)
         {
-            soldier[1].transform.position = Vector2.Lerp(soldier[1].transform.position, soldier[0].transform.position, FLICK_MOVE * Time.deltaTime);
+            case "flickMove":
+                soldier[0].transform.position =
+                    Vector2.Lerp(soldier[0].transform.position, soldier[1].transform.position, FLICK_MOVE * Time.deltaTime);
+                break;
+
+            case "returnMove":
+                soldier[0].transform.position = 
+                    Vector2.Lerp(soldier[0].transform.position, soldierReturnPos[0], FLICK_MOVE * Time.deltaTime);
+                break;
+
+            default:
+                break;
         }
-        //左フリック移動処理
-        if (FlickFlg[1])
+
+        switch(flickState_L)
         {
-            soldier[0].transform.position = Vector2.Lerp(soldier[0].transform.position, soldier[1].transform.position, FLICK_MOVE * Time.deltaTime);
+            case "flickMove":
+                soldier[1].transform.position =
+                    Vector2.Lerp(soldier[1].transform.position, soldier[0].transform.position, FLICK_MOVE * Time.deltaTime);
+                break;
+
+            case "returnMove":
+                soldier[1].transform.position =
+                    Vector2.Lerp(soldier[1].transform.position, soldierReturnPos[1], FLICK_MOVE * Time.deltaTime);
+                break;
+
+            default:
+                break;
         }
     }
+
+//-----------------------------------------------------------
+// フリック用の処理
+//-----------------------------------------------------------
+
+    //PlayerState state;
+
+    //public void PlayerMode(int modeNo)
+    //{
+    //    state = (PlayerState)modeNo;
+    //}
 }

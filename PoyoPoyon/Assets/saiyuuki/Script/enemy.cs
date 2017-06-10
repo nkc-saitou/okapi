@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     //-------------------------------------------------
     // public
@@ -13,12 +13,10 @@ public class enemy : MonoBehaviour
     // private
     //-------------------------------------------------
 
-    Ray[] ray = new Ray[2];
+    Ray2D[] ray = new Ray2D[2];
     RaycastHit2D[] hit = new RaycastHit2D[2];
 
-    float dis = 2;
-
-
+    float dis = 3;
 
     void Start()
     {
@@ -29,18 +27,23 @@ public class enemy : MonoBehaviour
     {
         for (int i = 0; i < soldier.Length; i++)
         {
-            hit[i] = Physics2D.Raycast(transform.position, soldier[i].transform.position,dis);
+            ray[i] = new Ray2D(transform.position, soldier[i].transform.position);
 
-            Debug.DrawRay(transform.position, soldier[i].transform.position * dis);
+            hit[i] = Physics2D.Raycast(ray[i].origin, ray[i].direction,dis);
+
 
             if (hit[0].collider && hit[1].collider)
             {
+                Debug.Log(hit[0].collider.gameObject +"  "+hit[1].collider.gameObject);
 
                 if (hit[0].collider.tag == "rPlayer" && hit[1].collider.tag == "lPlayer")
                 {
                     Destroy(gameObject);
                 }
-
+                else if(hit[1].collider.tag == "rPlayer" && hit[0].collider.tag == "lPlayer")
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
