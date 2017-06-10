@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     // 定数
     //-------------------------------------
 
-    const float FLICK_DIRECTION = 150; //フリックする距離
+    const float FLICK_DIRECTION = 200; //フリックする距離
     const float FLICK_MOVE = 2.0f;
 
     //-------------------------------------
@@ -17,9 +17,6 @@ public class PlayerMove : MonoBehaviour
     //-------------------------------------
 
     public GameObject[] soldier = new GameObject[2]; //0がRight,1がLeft
-
-    public Text test;
-    public Text test1;
 
     public static bool[] FlickFlg = new bool[2]; //0がRight,1がLeft
     public static bool[] flickController = new bool[2];
@@ -142,15 +139,14 @@ public class PlayerMove : MonoBehaviour
         //rayの衝突判定
         hit = Physics2D.Raycast(ray.origin, ray.direction);
 
-        if (hit.collider)
-        {
-             touchStartPos[t.fingerId] = t.position;
+        touchStartPos[t.fingerId] = t.position;
 
-            if (hit.collider.tag == "rPlayer" || hit.collider.tag == "lPlayer")
-            {
-                touchObj[t.fingerId] = hit.collider.gameObject;
-            }
+
+        if (hit.collider.tag == "rPlayer" || hit.collider.tag == "lPlayer")
+        {
+            touchObj[t.fingerId] = hit.collider.gameObject;
         }
+        
     }
 
     void TouchDrag(Touch t)

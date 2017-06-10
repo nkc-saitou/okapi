@@ -46,7 +46,7 @@ public class PlayerFlg : MonoBehaviour {
     //    }
     //}
 
-    void OnTriggerEnter2D(Collider2D hit)
+    void OnTriggerStay2D(Collider2D hit)
     {
         //おかっぴきさんにあたったらフラグをtrueにする
         if (hit.tag == "rPlayer" && PlayerMove.flickState_L != "upDown"/* && PlayerMove.flickState_R != null*/) PlayerMove.flickState_L = "returnMove";
