@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour
     //-------------------------------------------------
 
     List<GameObject> hitList = new List<GameObject>();
-    int hitIndex = 0;
 
     //GameObject[] soldier = new GameObject[2]; //0がRight,1がLeft
     //Ray2D[] ray = new Ray2D[2];

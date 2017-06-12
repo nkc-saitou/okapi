@@ -17,6 +17,7 @@ public class PlayerMove : MonoBehaviour
     //-------------------------------------
 
     public GameObject[] soldier = new GameObject[2]; //0がRight,1がLeft
+    public GameObject[] col = new GameObject[2];
 
     public static bool[] FlickFlg = new bool[2]; //0がRight,1がLeft
     public static bool[] flickController = new bool[2];
@@ -53,18 +54,6 @@ public class PlayerMove : MonoBehaviour
     //    Idle = 0,
     //    Move,
     //    Attack
-    //}
-
-    //enum Right_SoldierState
-    //{
-    //    FlickMove_R = 0,
-    //    ReturnMove_R
-    //}
-
-    //enum Left_SoldierState
-    //{
-    //    FlickMove_L = 0,
-    //    Returnmove_R
     //}
 
     enum ClickState
@@ -143,6 +132,7 @@ public class PlayerMove : MonoBehaviour
 
 
         if (hit.collider.tag == "rPlayer" || hit.collider.tag == "lPlayer")
+        //if(hit.collider.tag == "touch_R" || hit.collider.tag == "touch_L")
         {
             touchObj[t.fingerId] = hit.collider.gameObject;
         }
@@ -245,9 +235,18 @@ public class PlayerMove : MonoBehaviour
                 if (clickObj == soldier[soldierNo])
                 {
                     //クリックした位置へ移動させる
-                    Vector3 soilderPos = Camera.main.ScreenToWorldPoint(clickPos);
-                    soilderPos.x = clickObj.transform.position.x;
-                    soldier[soldierNo].transform.localPosition = soilderPos;
+                    Vector3 soldierPos = Camera.main.ScreenToWorldPoint(clickPos);
+                    soldierPos.x = soldier[soldierNo].transform.position.x;
+                    soldierPos.y = Mathf.Clamp(soldierPos.y, -4, 4);
+                    soldier[soldierNo].transform.localPosition = soldierPos;
+
+                    //float dis = Camera.main.ScreenToWorldPoint(clickPos).y - Camera.main.ScreenToWorldPoint(clickStartPos).y;
+
+                    //Debug.Log(dis);
+                    //Vector2 soldierPos = soldier[soldierNo].transform.position;
+                    //soldierPos.y += dis * Time.deltaTime;
+                    //soldierPos.x = startSoldierPos[soldierNo].x;
+                    //soldier[soldierNo].transform.position = soldierPos;
                 }
             }
             else if (Input.GetMouseButtonUp(0))
