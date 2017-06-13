@@ -12,7 +12,6 @@ public class Move : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(soldierStartFlg);
         if (soldierStartFlg == true)
         {
             Vector2 soldierPos = transform.position;

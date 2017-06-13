@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     // 定数
     //-------------------------------------
 
-    const float FLICK_DIRECTION = 200; //フリックする距離
+    const float FLICK_DIRECTION = 100; //フリックする距離
     const float FLICK_MOVE = 2.0f;
 
     //-------------------------------------
@@ -17,7 +17,8 @@ public class PlayerMove : MonoBehaviour
     //-------------------------------------
 
     public GameObject[] soldier = new GameObject[2]; //0がRight,1がLeft
-    public GameObject[] col = new GameObject[2];
+    public GameObject[] startBorder = new GameObject[2];
+    //public GameObject[] col = new GameObject[2];
 
     public static bool[] FlickFlg = new bool[2]; //0がRight,1がLeft
     public static bool[] flickController = new bool[2];
@@ -186,17 +187,17 @@ public class PlayerMove : MonoBehaviour
                 flickState_R = "flickMove";
             }
         }
-        else if(Mathf.Abs(disX[t.fingerId]) < Mathf.Abs(disY[t.fingerId]))
-        {
-            if(hit.collider.tag == "rPlayer")
-            {
-                flickState_R = "upDown";
-            }
-            if(hit.collider.tag == "lPlayer")
-            {
-                flickState_L = "upDown";
-            }
-        }
+        //else
+        //{
+        //    if(hit.collider.tag == "rPlayer")
+        //    {
+        //        flickState_R = "upDown";
+        //    }
+        //    if(hit.collider.tag == "lPlayer")
+        //    {
+        //        flickState_L = "upDown";
+        //    }
+        //}
     }
 
     //--------------------------------------------
@@ -274,7 +275,6 @@ public class PlayerMove : MonoBehaviour
                 soldierReturnPos[1] = soldier[1].transform.position;
                 soldierReturnPos[1].x = startSoldierPos[1].x;
                 flickState_L = "flickMove";
-
             }
             //左フリック
             else if (-FLICK_DIRECTION > disX)
@@ -284,18 +284,18 @@ public class PlayerMove : MonoBehaviour
                 flickState_R = "flickMove";
             }
         }
-        else if(Mathf.Abs(disX) < Mathf.Abs(disY))
-        {
-            if(clickObj == soldier[0])
-            {
-                flickState_R = "upDown";
-            }
+        //else if (Mathf.Abs(disX) < Mathf.Abs(disY))
+        //{
+        //    if(clickObj == soldier[0])
+        //    {
+        //        flickState_R = "upDown";
+        //    }
 
-            if(clickObj == soldier[1])
-            {
-                flickState_L = "upDown";
-            }
-        }
+        //    if(clickObj == soldier[1])
+        //    {
+        //        flickState_L = "upDown";
+        //    }
+        //}
     }
 
     //--------------------------------------------------
