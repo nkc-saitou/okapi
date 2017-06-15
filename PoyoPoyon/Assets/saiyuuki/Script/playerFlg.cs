@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerFlg : MonoBehaviour {
 
     //-----------------------------------------------------
-    // private
+    // 定数
     //-----------------------------------------------------
 
-    const float border = 5.9f;
+    const float border = 5.6f;
 
     //-----------------------------------------------------
     // public
@@ -33,7 +33,7 @@ public class PlayerFlg : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D hit)
     {
-
+        
         //おかっぴきさんにあたったらフラグをtrueにする
         if (hit.tag == "lPlayer" && PlayerMove.flickState_R != "upDown")
         {
@@ -66,13 +66,13 @@ public class PlayerFlg : MonoBehaviour {
 
     IEnumerator WaitTime_R()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
         PlayerMove.flickState_R = "returnMove";
     }
 
     IEnumerator WaitTime_L()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
         PlayerMove.flickState_L = "returnMove";
     }
 

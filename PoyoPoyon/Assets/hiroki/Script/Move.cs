@@ -8,8 +8,9 @@ public class Move : MonoBehaviour
 
     void Start()
     {
-
+        soldierStartFlg = false;
     }
+
     void Update()
     {
         if (soldierStartFlg == true)

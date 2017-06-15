@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     // 定数
     //-------------------------------------
 
-    const float FLICK_DIRECTION = 100; //フリックする距離
+    const float FLICK_DIRECTION = 50; //フリックする距離
     const float FLICK_MOVE = 2.0f;
 
     //-------------------------------------
@@ -17,7 +17,6 @@ public class PlayerMove : MonoBehaviour
     //-------------------------------------
 
     public GameObject[] soldier = new GameObject[2]; //0がRight,1がLeft
-    public GameObject[] startBorder = new GameObject[2];
     //public GameObject[] col = new GameObject[2];
 
     public static bool[] FlickFlg = new bool[2]; //0がRight,1がLeft
@@ -70,9 +69,10 @@ public class PlayerMove : MonoBehaviour
         for(int i = 0; i<FlickFlg.Length; i++)
         {
             FlickFlg[i] = false;
-            startSoldierPos[i] = soldier[i].transform.position;
             flickController[i] = true;
         }
+            startSoldierPos[0] = new Vector2(6.1f,soldier[0].transform.position.y);
+            startSoldierPos[1] = new Vector2(-6.1f, soldier[1].transform.position.y);
     }
 
     void Update()
@@ -187,17 +187,6 @@ public class PlayerMove : MonoBehaviour
                 flickState_R = "flickMove";
             }
         }
-        //else
-        //{
-        //    if(hit.collider.tag == "rPlayer")
-        //    {
-        //        flickState_R = "upDown";
-        //    }
-        //    if(hit.collider.tag == "lPlayer")
-        //    {
-        //        flickState_L = "upDown";
-        //    }
-        //}
     }
 
     //--------------------------------------------
@@ -284,18 +273,6 @@ public class PlayerMove : MonoBehaviour
                 flickState_R = "flickMove";
             }
         }
-        //else if (Mathf.Abs(disX) < Mathf.Abs(disY))
-        //{
-        //    if(clickObj == soldier[0])
-        //    {
-        //        flickState_R = "upDown";
-        //    }
-
-        //    if(clickObj == soldier[1])
-        //    {
-        //        flickState_L = "upDown";
-        //    }
-        //}
     }
 
     //--------------------------------------------------

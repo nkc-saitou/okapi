@@ -20,6 +20,6 @@ public class SceneLoadScript : MonoBehaviour
     }
     void title()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("main");
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("stageSelect");
     }
 }
