@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class stageSelect : MonoBehaviour
 {
+<<<<<<< HEAD
     public int stageNo;
 
     public void SceneLoad()
@@ -33,5 +34,11 @@ public class stageSelect : MonoBehaviour
                 Application.LoadLevel("main");
                 break;
         }
+=======
+
+    public void SceneLoad()
+    {
+        Application.LoadLevel("main");
+>>>>>>> c6b3ecf3a18186c2553fa675abdcb3d194e08ec8
     }
 }
