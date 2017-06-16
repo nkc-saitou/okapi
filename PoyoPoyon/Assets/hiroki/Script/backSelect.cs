@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class backSelect : MonoBehaviour
 {
 
     public void SceneLoad()
     {
-        Application.LoadLevel("stageSelect");
+        SceneManager.LoadScene("stageSelect");
     }
 }

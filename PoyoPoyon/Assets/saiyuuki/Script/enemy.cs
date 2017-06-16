@@ -8,6 +8,9 @@ public class Enemy : MonoBehaviour
     //public Text scoreText;
     public static float memoryTime;
 
+    GameObject soldierAttackEffect;
+    GameObject effectSmoke;
+
     float scoreTime;
     bool scoreFlg = false;
 
@@ -15,7 +18,8 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-
+        soldierAttackEffect = Resources.Load("smoke",typeof(GameObject)) as GameObject;
+        
     }
 
     void OnTriggerEnter2D(Collider2D hit)
@@ -27,6 +31,8 @@ public class Enemy : MonoBehaviour
             //リストに追加されていないオブジェクトの場合のみリストに追加
             if(!hitList.Contains(hit.gameObject))
             {
+                effectSmoke = Instantiate(soldierAttackEffect, gameObject.transform);
+
                 hitList.Add(hit.gameObject);
             }
         }
@@ -41,6 +47,7 @@ public class Enemy : MonoBehaviour
 
             if(hitList.Contains(hit.gameObject))
             {
+                Destroy(effectSmoke);
                 hitList.Remove(hit.gameObject);
             }
         }
@@ -58,6 +65,7 @@ public class Enemy : MonoBehaviour
             {
                 if (hitList[1].tag == "rPlayer" || hitList[1].tag == "lPlayer")
                 {
+                    Destroy(effectSmoke);
                     Score.scoreCountFlg = true;
                     memoryTime = scoreTime;
                     scoreTime = 0;

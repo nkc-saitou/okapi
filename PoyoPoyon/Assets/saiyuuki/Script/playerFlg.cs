@@ -66,14 +66,13 @@ public class PlayerFlg : MonoBehaviour {
 
     IEnumerator WaitTime_R()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1.0f);
         PlayerMove.flickState_R = "returnMove";
     }
 
     IEnumerator WaitTime_L()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1.0f);
         PlayerMove.flickState_L = "returnMove";
     }
-
 }
