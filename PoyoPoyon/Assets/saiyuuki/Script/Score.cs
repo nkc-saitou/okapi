@@ -19,7 +19,7 @@ public class Score : MonoBehaviour {
     //-------------------------------------
 
     float score; //計算用スコア
-    float scoreDisplay; //表示用スコア
+    public static float scoreDisplay; //表示用スコア
 
     float maxScore = 10.0f;
 

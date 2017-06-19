@@ -54,8 +54,12 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if(scoreFlg) scoreTime += 1 * Time.deltaTime;
-        //scoreText.text = scoreTime.ToString();
+        EnemyDec();
+    }
+
+    public virtual void EnemyDec()
+    {
+        if (scoreFlg) scoreTime += 1 * Time.deltaTime;
 
         //リストに両方のおかっぴきさんが格納されていたらオブジェクト消去
         if (hitList.Count == 2)

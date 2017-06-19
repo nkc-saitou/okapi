@@ -8,6 +8,7 @@ public class SceneLoadScript : MonoBehaviour
 
     void Start()
     {
+        AudioManager.Instance.PlayBGM("title");
         Move.soldierStartFlg = false;
     }
     void Update()
@@ -16,11 +17,14 @@ public class SceneLoadScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Move.soldierStartFlg = true;
+            AudioManager.Instance.PlaySE("hit");
             Invoke("title", SceneSpeed);
+
         }
     }
     void title()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("stageSelect");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("stageSelect");
+
     }
 }

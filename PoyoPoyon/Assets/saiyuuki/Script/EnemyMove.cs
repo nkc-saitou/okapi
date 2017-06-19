@@ -66,7 +66,6 @@ public class EnemyMove : MonoBehaviour {
 
             yield return new WaitForSeconds(2.0f);
             switchFlg_upDown = true;
-            Debug.Log("ok");
         }
 
         transform.localPosition = enemyPos;
