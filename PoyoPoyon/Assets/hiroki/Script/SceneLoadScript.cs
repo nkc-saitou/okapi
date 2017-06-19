@@ -5,6 +5,7 @@ public class SceneLoadScript : MonoBehaviour
 {
 
     public int SceneSpeed = 4;
+
     void Start()
     {
         Move.soldierStartFlg = false;

@@ -37,8 +37,6 @@ public class Score : MonoBehaviour {
             score = Enemy.memoryTime;
             nowScore = maxScore - (score * 10);
 
-            
-
             scoreDisplay += nowScore;
             test.text = Mathf.CeilToInt(scoreDisplay).ToString();
             scoreCountFlg = false;

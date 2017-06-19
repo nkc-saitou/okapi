@@ -19,7 +19,6 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         soldierAttackEffect = Resources.Load("smoke",typeof(GameObject)) as GameObject;
-        
     }
 
     void OnTriggerEnter2D(Collider2D hit)
@@ -78,5 +77,4 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
 }
