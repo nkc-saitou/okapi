@@ -9,16 +9,16 @@ public class Enemy : MonoBehaviour
     public static float memoryTime;
 
     GameObject soldierAttackEffect;
-    GameObject effectSmoke;
+    protected GameObject effectSmoke;
 
-    float scoreTime;
+    protected float scoreTime;
     bool scoreFlg = false;
 
     List<GameObject> hitList = new List<GameObject>();
 
     void Start()
     {
-        soldierAttackEffect = Resources.Load("smoke",typeof(GameObject)) as GameObject;
+        //soldierAttackEffect = Resources.Load("Smoke",typeof(GameObject)) as GameObject;
     }
 
     void OnTriggerEnter2D(Collider2D hit)
@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
             //リストに追加されていないオブジェクトの場合のみリストに追加
             if(!hitList.Contains(hit.gameObject))
             {
-                effectSmoke = Instantiate(soldierAttackEffect, gameObject.transform);
+                effectSmoke = Instantiate((GameObject)Resources.Load("Prefab/Smoke"), gameObject.transform);
 
                 hitList.Add(hit.gameObject);
             }
@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
         EnemyDec();
     }
 
-    public virtual void EnemyDec()
+    public void EnemyDec()
     {
         if (scoreFlg)
         {
@@ -73,16 +73,29 @@ public class Enemy : MonoBehaviour
                 if (hitList[1].tag == "rPlayer" || hitList[1].tag == "lPlayer")
                 {
                     Destroy(effectSmoke);
-                    Score.scoreCountFlg = true;
-                    memoryTime = scoreTime;
-                    scoreTime = 0;
 
-                    PlayerMove.flickState_R = "returnMove";
-                    PlayerMove.flickState_L = "returnMove";
-
-                    Destroy(gameObject);
+                    EnemySetting();
                 }
             }
         }
+    }
+
+    //public float MemoryTime
+    //{
+    //    get { return memoryTime; }
+    //    set { memoryTime = value; }
+    //}
+
+    public virtual void EnemySetting()
+    {
+        Score.scoreCountFlg = true;
+        memoryTime = scoreTime;
+        Debug.Log(memoryTime);
+        scoreTime = 0;
+
+        PlayerMove.flickState_R = "returnMove";
+        PlayerMove.flickState_L = "returnMove";
+
+        Destroy(gameObject);
     }
 }

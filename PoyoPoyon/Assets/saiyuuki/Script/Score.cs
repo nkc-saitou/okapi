@@ -23,9 +23,12 @@ public class Score : MonoBehaviour {
 
     float maxScore = 10;
 
+    bool scoreFlg = true;
+
     void Start()
     {
         scoreCountFlg = false;
+        scoreDisplay = 0;
     }
 
     void Update ()
@@ -39,7 +42,9 @@ public class Score : MonoBehaviour {
 
             scoreDisplay += nowScore;
             test.text = Mathf.FloorToInt(scoreDisplay).ToString();
+
             scoreCountFlg = false;
+            scoreFlg = false;
         }
 	}
 }

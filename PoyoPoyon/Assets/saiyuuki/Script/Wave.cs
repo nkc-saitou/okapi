@@ -64,7 +64,7 @@ public class Wave : MonoBehaviour {
                 if (limitWave == nowWave)
                 {
 
-                    AudioManager.Instance.FadeOutBGM();
+                    //AudioManager.Instance.FadeOutBGM();
 
                     yield return new WaitForSeconds(1.0f);
                     endImage.SetBool("endFlg", true);
@@ -72,7 +72,7 @@ public class Wave : MonoBehaviour {
 
                     yield return new WaitForSeconds(2.0f);
                     Move.soldierStartFlg = true;
-                    AudioManager.Instance.PlaySE("mainEnd");
+                    //AudioManager.Instance.PlaySE("mainEnd");
 
                     yield return new WaitForSeconds(2.0f);
                     SceneManager.LoadScene("result");
