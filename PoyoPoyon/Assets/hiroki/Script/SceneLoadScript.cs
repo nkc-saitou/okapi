@@ -16,9 +16,11 @@ public class SceneLoadScript : MonoBehaviour
         //画面のどこかをクリックしたときにゲーム開始
         if (Input.GetMouseButtonDown(0))
         {
+
             Move.soldierStartFlg = true;
             AudioManager.Instance.PlaySE("hit");
             Invoke("title", SceneSpeed);
+            AudioManager.Instance.FadeOutBGM();
 
         }
     }

@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
+
+    private const string BGM_VOLUME_KEY = "BGM_VOLUME_KEY";
+    private const float BGM_VOLUME_DEFULT = 1.0f;
+
     //フェード時間
-    public const float FADE_SPEED_RATE_HIGH = 0.9f;
-    public const float FADE_SPEED_RATE_LOW = 0.3f;
+    public const float FADE_SPEED_RATE_HIGH = 0.7f;
+    public const float FADE_SPEED_RATE_LOW = 0.4f;
     private float _bgmFadeSpeedRate = FADE_SPEED_RATE_HIGH;
 
     string nextName_BGM;
@@ -110,6 +114,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         if(attachBGMSource.volume <= 0)
         {
             attachBGMSource.Stop();
+            attachBGMSource.volume = PlayerPrefs.GetFloat(BGM_VOLUME_KEY, BGM_VOLUME_DEFULT);
             isFadeOut = false;
 
             if(!string.IsNullOrEmpty(nextName_BGM))

@@ -59,7 +59,11 @@ public class Enemy : MonoBehaviour
 
     public virtual void EnemyDec()
     {
-        if (scoreFlg) scoreTime += 1 * Time.deltaTime;
+        if (scoreFlg)
+        {
+            scoreTime += 1 * Time.deltaTime;
+            if (scoreTime >= 1) scoreTime = 1;
+        }
 
         //リストに両方のおかっぴきさんが格納されていたらオブジェクト消去
         if (hitList.Count == 2)

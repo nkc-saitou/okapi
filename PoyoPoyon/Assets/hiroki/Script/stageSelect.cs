@@ -7,8 +7,26 @@ public class stageSelect : MonoBehaviour
     public int stageNo;
     public static int rankingStageNo;
 
+    void Start()
+    {
+        AudioManager.Instance.PlayBGM("StageSelect");
+    }
+
     public void SceneLoad()
     {
+        //BGMフェードアウト
+        AudioManager.Instance.FadeOutBGM();
+
+        //アニメーション再生
+        Move.soldierStartFlg = true;
+
+        StartCoroutine(waitTime());
+    }
+
+    IEnumerator waitTime()
+    {
+        yield return new WaitForSeconds(2.0f);
+
         switch (stageNo)
         {
             case 0:
@@ -41,5 +59,6 @@ public class stageSelect : MonoBehaviour
                 rankingStageNo = 5;
                 break;
         }
+
     }
 }

@@ -63,11 +63,16 @@ public class Wave : MonoBehaviour {
                 //ウェーブの上限数がきたらリザルトシーンに遷移
                 if (limitWave == nowWave)
                 {
+
+                    AudioManager.Instance.FadeOutBGM();
+
                     yield return new WaitForSeconds(1.0f);
                     endImage.SetBool("endFlg", true);
 
+
                     yield return new WaitForSeconds(2.0f);
                     Move.soldierStartFlg = true;
+                    AudioManager.Instance.PlaySE("mainEnd");
 
                     yield return new WaitForSeconds(2.0f);
                     SceneManager.LoadScene("result");

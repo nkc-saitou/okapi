@@ -18,7 +18,9 @@ public class Ranking : MonoBehaviour {
 
         SaveRanking(Score.scoreDisplay);
         LoadRanking();
-	}
+
+        ScoreReset();
+    }
 	
     void SaveRanking(float new_score)
     {
@@ -36,7 +38,7 @@ public class Ranking : MonoBehaviour {
                 }
             }
         }
-        else
+        else if(rankingDate[stageNo].score[0] == 0)
         {
             //セーブデータがなかったときは先頭へ
             rankingDate[stageNo].score[0] = new_score;
@@ -47,7 +49,12 @@ public class Ranking : MonoBehaviour {
     {
         for(int i = 0; i<RANKING_NUM; i++)
         {
-            rankLabel[i].text = (i + 1).ToString() + "位 : " + Mathf.CeilToInt(rankingDate[stageNo].score[i]).ToString();
+            rankLabel[i].text = (i + 1).ToString() + "位 : " + Mathf.FloorToInt(rankingDate[stageNo].score[i]).ToString();
         }
+    }
+
+    void ScoreReset()
+    {
+        Score.scoreDisplay = 0; //スコアリセット
     }
 }

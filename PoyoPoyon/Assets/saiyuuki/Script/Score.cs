@@ -10,7 +10,7 @@ public class Score : MonoBehaviour {
     //------------------------------------
 
     public static bool scoreCountFlg;
-    public static float nowScore;
+    float nowScore;
 
     public Text test;
 
@@ -21,7 +21,7 @@ public class Score : MonoBehaviour {
     float score; //計算用スコア
     public static float scoreDisplay; //表示用スコア
 
-    float maxScore = 10.0f;
+    float maxScore = 10;
 
     void Start()
     {
@@ -38,7 +38,7 @@ public class Score : MonoBehaviour {
             nowScore = maxScore - (score * 10);
 
             scoreDisplay += nowScore;
-            test.text = Mathf.CeilToInt(scoreDisplay).ToString();
+            test.text = Mathf.FloorToInt(scoreDisplay).ToString();
             scoreCountFlg = false;
         }
 	}
