@@ -21,6 +21,8 @@ public class stageSelect : MonoBehaviour
         Move.soldierStartFlg = true;
 
         StartCoroutine(waitTime());
+        AudioManager.Instance.PlaySE("don");
+        AudioManager.Instance.FadeOutBGM();
     }
 
     IEnumerator waitTime()
@@ -35,27 +37,27 @@ public class stageSelect : MonoBehaviour
                 break;
 
             case 1:
-                SceneManager.LoadScene("main2");
+                SceneManager.LoadScene("main");
                 rankingStageNo = 1;
                 break;
 
             case 2:
-                SceneManager.LoadScene("main3");
+                SceneManager.LoadScene("main");
                 rankingStageNo = 2;
                 break;
 
             case 3:
-                SceneManager.LoadScene("main4");
+                SceneManager.LoadScene("main");
                 rankingStageNo = 3;
                 break;
 
             case 4:
-                SceneManager.LoadScene("main5");
+                SceneManager.LoadScene("main");
                 rankingStageNo = 4;
                 break;
 
             case 5:
-                SceneManager.LoadScene("main6");
+                SceneManager.LoadScene("main");
                 rankingStageNo = 5;
                 break;
         }

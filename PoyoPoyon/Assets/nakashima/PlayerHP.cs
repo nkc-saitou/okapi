@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHP : MonoBehaviour
 {
     public GameObject[] HP;
     int hpNo; //hp配列の番号
+
+    public Animator endImage;
     
     void Start ()
     {
@@ -17,7 +20,10 @@ public class PlayerHP : MonoBehaviour
 
 	void Update ()
     {
-		
+		if(hpNo >= HP.Length)
+        {
+            StartCoroutine(GameOver());
+        }
 	}
 
     void OnTriggerEnter2D(Collider2D other)
@@ -31,5 +37,20 @@ public class PlayerHP : MonoBehaviour
                 hpNo++;
             }
         }
+    }
+
+    IEnumerator GameOver()
+    {
+        //AudioManager.Instance.FadeOutBGM();
+
+        yield return new WaitForSeconds(1.0f);
+        endImage.SetBool("endFlg", true);
+
+        yield return new WaitForSeconds(2.0f);
+        Move.soldierStartFlg = true;
+        //AudioManager.Instance.PlaySE("mainEnd");
+
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene("gameOver");
     }
 }

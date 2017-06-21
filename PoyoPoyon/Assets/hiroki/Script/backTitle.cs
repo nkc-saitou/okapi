@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 public class backTitle : MonoBehaviour
 {
 
-    public void SceneLoad()
+    public void TitleLoad()
     {
         SceneManager.LoadScene("title");
+    }
+
+    public void StageSelectLoad()
+    {
+        SceneManager.LoadScene("stageSelect");
     }
 }

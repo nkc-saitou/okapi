@@ -18,7 +18,7 @@ public class SceneLoadScript : MonoBehaviour
         {
 
             Move.soldierStartFlg = true;
-            AudioManager.Instance.PlaySE("hit");
+            AudioManager.Instance.PlaySE("iyoo");
             Invoke("title", SceneSpeed);
             AudioManager.Instance.FadeOutBGM();
 

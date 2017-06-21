@@ -12,7 +12,7 @@ public class BossEnemy : Enemy
 
     public override void EnemySetting()
     {
-        ////base.EnemySetting();
+        //base.EnemySetting();
 
         StartCoroutine(AttackTime());
 
@@ -28,11 +28,7 @@ public class BossEnemy : Enemy
             Destroy(gameObject);
 
             Score.scoreCountFlg = true;
-            memoryTime = scoreTime;
-
-            Debug.Log(memoryTime);
-
-            scoreTime = 0;
+            memoryTime = 0;
 
             PlayerMove.flickState_R = "returnMove";
             PlayerMove.flickState_L = "returnMove";
@@ -45,7 +41,6 @@ public class BossEnemy : Enemy
         {
             GameObject.Destroy(n.gameObject);
         }
-
     }
 
     IEnumerator AttackTime()

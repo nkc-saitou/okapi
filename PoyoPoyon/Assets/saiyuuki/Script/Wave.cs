@@ -10,6 +10,10 @@ public class Wave : MonoBehaviour {
     //-----------------------------------------
 
     public GameObject[] wave;
+    public GameObject[] hurdle;
+
+    public GameObject hurdleManager;
+
     public Animator endImage;
     public int limitWave;
 
@@ -35,16 +39,18 @@ public class Wave : MonoBehaviour {
         
         while(true)
         {
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(2.0f);
 
             //５回ウェーブ来るまで続ける
             if (limitWave > nowWave)
             {
                 //ウェーブ生成
-                GameObject waves = Instantiate(wave[waveNo], wave[waveNo].transform);
+                GameObject waves = Instantiate(wave[waveNo], wave[waveNo].transform.localPosition,wave[waveNo].transform.rotation);
+                GameObject hurdles = Instantiate(hurdle[waveNo], wave[waveNo].transform.localPosition, wave[waveNo].transform.rotation);
 
-                //生成したウェーブをアタッチしたオブジェクトの子にする
+                //生成したウェーブを指定したオブジェクトの子にする
                 waves.transform.parent = transform;
+                hurdles.transform.parent = hurdleManager.transform;
 
                 //子オブジェクトの数が０になるまで処理を止める
                 while (waves.transform.childCount != 0)
@@ -63,7 +69,6 @@ public class Wave : MonoBehaviour {
                 //ウェーブの上限数がきたらリザルトシーンに遷移
                 if (limitWave == nowWave)
                 {
-
                     //AudioManager.Instance.FadeOutBGM();
 
                     yield return new WaitForSeconds(1.0f);
@@ -77,6 +82,7 @@ public class Wave : MonoBehaviour {
                     yield return new WaitForSeconds(2.0f);
                     SceneManager.LoadScene("result");
                 }
+                
 
                 //ウェーブ数が配列の要素数を超えたらウェーブ数を０に戻す
                 if (wave.Length <= waveNo)
