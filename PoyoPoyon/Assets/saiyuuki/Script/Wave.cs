@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Wave : MonoBehaviour {
 
@@ -17,6 +18,10 @@ public class Wave : MonoBehaviour {
     public Animator endImage;
     public int limitWave;
 
+    public WaveMove waveMove;
+
+    public Slider slider;
+
     //-----------------------------------------
     // private
     //-----------------------------------------
@@ -24,11 +29,21 @@ public class Wave : MonoBehaviour {
     int waveNo = 0;
     int nowWave = 0;
 
+    float LimitTime;
+
 	void Start ()
     {
         StartCoroutine(WaveStart());
     }
-	
+
+    void Update()
+    {
+        if (WaveMove.WaveMoveEnd)
+        {
+            slider.value = WaveMove.timeScaleX;
+        }
+    }
+
     IEnumerator WaveStart()
     {
         //ウェーブの配列に何も格納されていなかったら終了
@@ -61,6 +76,8 @@ public class Wave : MonoBehaviour {
                 //子オブジェクトが０になったらウェーブを削除
                 Destroy(waves);
 
+                WaveMove.WaveMoveEnd = false;
+
                 //ウェーブの配列の要素
                 waveNo++;
                 //現在のウェーブ数
@@ -69,7 +86,7 @@ public class Wave : MonoBehaviour {
                 //ウェーブの上限数がきたらリザルトシーンに遷移
                 if (limitWave == nowWave)
                 {
-                    //AudioManager.Instance.FadeOutBGM();
+                    AudioManager.Instance.FadeOutBGM();
 
                     yield return new WaitForSeconds(1.0f);
                     endImage.SetBool("endFlg", true);
@@ -77,7 +94,7 @@ public class Wave : MonoBehaviour {
 
                     yield return new WaitForSeconds(2.0f);
                     Move.soldierStartFlg = true;
-                    //AudioManager.Instance.PlaySE("mainEnd");
+                    AudioManager.Instance.PlaySE("mainEnd");
 
                     yield return new WaitForSeconds(2.0f);
                     SceneManager.LoadScene("result");

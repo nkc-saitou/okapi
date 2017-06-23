@@ -12,7 +12,9 @@ public class Enemy : MonoBehaviour
     protected GameObject effectSmoke;
 
     protected float scoreTime;
+
     bool scoreFlg = false;
+    protected bool weaponFlg = true; //オブジェクトがあったらtrue,既に消えていたらfalse
 
     List<GameObject> hitList = new List<GameObject>();
 
@@ -65,6 +67,22 @@ public class Enemy : MonoBehaviour
             if (scoreTime >= 1) scoreTime = 1;
         }
 
+        if(hitList.Count >= 1)
+        {
+            if(hitList[0].tag == "rPlayer" || hitList[0].tag == "lPlayer")
+            {
+                if(weaponFlg) transform.FindChild("Attack/Attack").gameObject.SetActive(false);
+            }
+        }
+
+        if(hitList.Count == 0)
+        {
+            if(weaponFlg)
+            {
+                transform.FindChild("Attack/Attack").gameObject.SetActive(true);
+            }
+        }
+
         //リストに両方のおかっぴきさんが格納されていたらオブジェクト消去
         if (hitList.Count == 2)
         {
@@ -73,18 +91,12 @@ public class Enemy : MonoBehaviour
                 if (hitList[1].tag == "rPlayer" || hitList[1].tag == "lPlayer")
                 {
                     Destroy(effectSmoke);
-
+                    weaponFlg = false;
                     EnemySetting();
                 }
             }
         }
     }
-
-    //public float MemoryTime
-    //{
-    //    get { return memoryTime; }
-    //    set { memoryTime = value; }
-    //}
 
     public virtual void EnemySetting()
     {

@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
-
+    //---------------------------------------------------------
+    // private
+    //---------------------------------------------------------
     private const string BGM_VOLUME_KEY = "BGM_VOLUME_KEY";
     private const float BGM_VOLUME_DEFULT = 1.0f;
 
-    //フェード時間
-    public const float FADE_SPEED_RATE_HIGH = 0.7f;
-    public const float FADE_SPEED_RATE_LOW = 0.4f;
     private float _bgmFadeSpeedRate = FADE_SPEED_RATE_HIGH;
 
     string nextName_BGM;
@@ -18,9 +17,18 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
     bool isFadeOut = false;
 
+    Dictionary<string, AudioClip> _seDic,_bgmDic;
+
+    //--------------------------------------------------------
+    // public 
+    //--------------------------------------------------------
+
+    //フェード時間
+    public const float FADE_SPEED_RATE_HIGH = 0.7f;
+    public const float FADE_SPEED_RATE_LOW = 0.4f;
+
     public AudioSource attachSESource,attachBGMSource;
 
-    Dictionary<string, AudioClip> _seDic,_bgmDic;
 
     void Awake()
     {

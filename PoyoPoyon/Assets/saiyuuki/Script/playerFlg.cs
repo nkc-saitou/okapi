@@ -62,6 +62,19 @@ public class PlayerFlg : MonoBehaviour {
                 StartCoroutine(WaitTime_L());
             }
         }
+
+        else if (hit.tag == "weapon")
+        {
+            if (soldierNo == 0 && PlayerMove.flickState_R != "returnMove")
+            {
+                PlayerMove.flickState_R = "returnMove";
+            }
+
+            if (soldierNo == 1 && PlayerMove.flickState_L != "returnMove")
+            {
+                PlayerMove.flickState_L = "returnMove";
+            }
+        }
     }
 
     IEnumerator WaitTime_R()

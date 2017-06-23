@@ -39,21 +39,23 @@ public class EnemyMove : MonoBehaviour {
     void Start()
     {
         startSoldierPos = transform.localPosition;
+
+        if (moveType == soldierMoveType.UpDown) stuck = "UpDown";
+        else if (moveType == soldierMoveType.RightLeft) stuck = "RightLeft";
     }
 
     void Update()
     {
+
         if (WaveMove.WaveMoveEnd == true)
         {
             switch (moveType)
             {
                 case soldierMoveType.UpDown:
-                    //stuck = "UpDown";
                     soldierMove_UpDown();
                     break;
 
                 case soldierMoveType.RightLeft:
-                    //stuck = "RightLeft";
                     soldierMove_RightLeft();
                     break;
 
@@ -61,6 +63,11 @@ public class EnemyMove : MonoBehaviour {
 
                     break;
             }
+        }
+
+        if (WaveMove.weveEnd)
+        {
+            moveType = soldierMoveType.Stop;
         }
     }
 
@@ -84,12 +91,6 @@ public class EnemyMove : MonoBehaviour {
             enemyPos.y -= moveSpeed * Time.deltaTime;
         }
 
-        if (switchFlg_upDown)
-        {
-            upRight = !upRight;
-            switchFlg_upDown = false;
-        }
-
         transform.localPosition = enemyPos;
 
     }
@@ -97,9 +98,8 @@ public class EnemyMove : MonoBehaviour {
     void soldierMove_RightLeft()
     {
         enemyPos = transform.localPosition;
-        float enemyDis = enemyPos.x - startSoldierPos.x;
 
-        Debug.Log(Mathf.Abs(enemyDis));
+        float enemyDis = enemyPos.x - startSoldierPos.x;
 
         if (Mathf.Abs(enemyDis) >= moveLimit)
         {
@@ -116,23 +116,13 @@ public class EnemyMove : MonoBehaviour {
             enemyPos.x -= moveSpeed * Time.deltaTime;
         }
 
-        if (switchFlg_upDown)
-        {
-            upRight = !upRight;
-            switchFlg_upDown = false;
-        }
-
         transform.localPosition = enemyPos;
     }
 
-    void soldierMove_Stop()
-    {
-        //Flgを全てfalseに
-        switchFlg_upDown = false;
-    }
     void OnTriggerEnter2D(Collider2D other)
     {
-        stuck = moveType.ToString();
+        //stuck = moveType.ToString();
+
         if (other.tag == "lPlayer" || other.tag == "rPlayer")
         {
             moveType = soldierMoveType.Stop;

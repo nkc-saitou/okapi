@@ -6,7 +6,7 @@ public class BossEnemy : Enemy
 {
     public float hp = 5;
     public float hpMax = 5;
-    public float attackTime = 1.0f;
+    public float attackTime = 0.5f;
 
     bool hpFlg = true;
 

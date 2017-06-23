@@ -175,6 +175,8 @@ public class PlayerMove : MonoBehaviour
             //右フリック(LeftObjが右へ移動)
             if (FLICK_DIRECTION < disX[t.fingerId])
             {
+                AudioManager.Instance.PlaySE("goyou");
+
                 soldierReturnPos[1] = soldier[1].transform.position;
                 soldierReturnPos[1].x = startSoldierPos[1].x;
                 flickState_L = "flickMove";
@@ -182,6 +184,8 @@ public class PlayerMove : MonoBehaviour
             //左フリック(RightObjが左へ移動)
             else if (-FLICK_DIRECTION > disX[t.fingerId])
             {
+                AudioManager.Instance.PlaySE("goyou");
+
                 soldierReturnPos[0] = soldier[0].transform.position;
                 soldierReturnPos[0].x = startSoldierPos[0].x;
                 flickState_R = "flickMove";
@@ -261,6 +265,8 @@ public class PlayerMove : MonoBehaviour
             //右フリック
             if (FLICK_DIRECTION < disX)
             {
+                AudioManager.Instance.PlaySE("goyou");
+
                 soldierReturnPos[1] = soldier[1].transform.position;
                 soldierReturnPos[1].x = startSoldierPos[1].x;
                 flickState_L = "flickMove";
@@ -268,6 +274,8 @@ public class PlayerMove : MonoBehaviour
             //左フリック
             else if (-FLICK_DIRECTION > disX)
             {
+                AudioManager.Instance.PlaySE("goyou");
+
                 soldierReturnPos[0] = soldier[0].transform.position;
                 soldierReturnPos[0].x = startSoldierPos[0].x;
                 flickState_R = "flickMove";
