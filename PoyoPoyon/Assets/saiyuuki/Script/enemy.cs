@@ -14,13 +14,13 @@ public class Enemy : MonoBehaviour
     protected float scoreTime;
 
     bool scoreFlg = false;
+    bool smokeFlg = false;
     protected bool weaponFlg = true; //オブジェクトがあったらtrue,既に消えていたらfalse
 
     List<GameObject> hitList = new List<GameObject>();
 
     void Start()
     {
-        //soldierAttackEffect = Resources.Load("Smoke",typeof(GameObject)) as GameObject;
     }
 
     void OnTriggerEnter2D(Collider2D hit)
@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
             //リストに追加されていないオブジェクトの場合のみリストに追加
             if(!hitList.Contains(hit.gameObject))
             {
-                effectSmoke = Instantiate((GameObject)Resources.Load("Prefab/Smoke"), gameObject.transform);
+                smokeFlg = true;
 
                 hitList.Add(hit.gameObject);
             }
@@ -57,6 +57,12 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         EnemyDec();
+
+        if(smokeFlg)
+        {
+            effectSmoke = Instantiate((GameObject)Resources.Load("Prefab/Smoke"), gameObject.transform);
+            smokeFlg = false;
+        }
     }
 
     public void EnemyDec()

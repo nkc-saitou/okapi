@@ -7,7 +7,7 @@ public class WaveMove : MonoBehaviour {
 
     const float border = 10;
 
-    public static bool WaveMoveEnd = false;
+    public static bool WaveMoveEnd;
 
     public bool hurdleFlg = false; //enemyだったらfalse,障害物だったらtrue
     Vector2 wavePos;
@@ -23,7 +23,10 @@ public class WaveMove : MonoBehaviour {
         if (hurdleFlg) waveMove = 2.5f;
         else if (hurdleFlg == false) waveMove = 1.5f;
 
-        //LimitTime = MaxLimit;
+        LimitTime = MaxLimit;
+
+        WaveMoveEnd = false;
+        weveEnd = false;
     }
 
     void Update()
@@ -42,6 +45,7 @@ public class WaveMove : MonoBehaviour {
 
             if (WaveMoveEnd == true)
             {
+                Debug.Log(LimitTime);
                 LimitTime -= Time.deltaTime;
                 timeScaleX = LimitTime / MaxLimit;
             }
@@ -72,8 +76,6 @@ public class WaveMove : MonoBehaviour {
 
             }
         }
-
-        Debug.Log(LimitTime);
 
         if (Wave.limitResetFlg == true)
         {
