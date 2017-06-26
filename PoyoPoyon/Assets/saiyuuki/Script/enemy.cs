@@ -102,7 +102,6 @@ public class Enemy : MonoBehaviour
     {
         Score.scoreCountFlg = true;
         memoryTime = scoreTime;
-        Debug.Log(memoryTime);
         scoreTime = 0;
 
         PlayerMove.flickState_R = "returnMove";

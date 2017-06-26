@@ -7,7 +7,7 @@ public class toRanking : MonoBehaviour {
 
     public void title()
     {
-        SceneManager.LoadScene("result");
+        SceneManager.LoadScene("ranking");
 
     }
 

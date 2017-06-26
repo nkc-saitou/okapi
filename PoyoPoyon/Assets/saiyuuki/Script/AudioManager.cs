@@ -25,7 +25,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
     //フェード時間
     public const float FADE_SPEED_RATE_HIGH = 0.7f;
-    public const float FADE_SPEED_RATE_LOW = 0.4f;
+    public const float FADE_SPEED_RATE_LOW = 0.15f;
 
     public AudioSource attachSESource,attachBGMSource;
 
@@ -114,6 +114,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     {
         if(!isFadeOut)
         {
+            attachBGMSource.volume = 0.4f;
             return;
         }
 

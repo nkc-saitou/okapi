@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class stageSelect : MonoBehaviour
 {
     public int stageNo;
-    public static int rankingStageNo;
+    //public static int rankingStageNo;
 
     void Start()
     {
@@ -33,32 +33,32 @@ public class stageSelect : MonoBehaviour
         {
             case 0:
                 SceneManager.LoadScene("main");
-                rankingStageNo = 0;
+                RankingStageNo.rankingStageNo = 0;
                 break;
 
             case 1:
                 SceneManager.LoadScene("main");
-                rankingStageNo = 1;
+                RankingStageNo.rankingStageNo = 1;
                 break;
 
             case 2:
                 SceneManager.LoadScene("main");
-                rankingStageNo = 2;
+                RankingStageNo.rankingStageNo = 2;
                 break;
 
             case 3:
                 SceneManager.LoadScene("main");
-                rankingStageNo = 3;
+                RankingStageNo.rankingStageNo = 3;
                 break;
 
             case 4:
                 SceneManager.LoadScene("main");
-                rankingStageNo = 4;
+                RankingStageNo.rankingStageNo = 4;
                 break;
 
             case 5:
                 SceneManager.LoadScene("main");
-                rankingStageNo = 5;
+                RankingStageNo.rankingStageNo = 5;
                 break;
         }
 

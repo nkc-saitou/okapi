@@ -19,7 +19,6 @@ public class Score : MonoBehaviour {
     //-------------------------------------
 
     float score; //計算用スコア
-    public static float scoreDisplay; //表示用スコア
 
     float maxScore = 10;
 
@@ -28,7 +27,7 @@ public class Score : MonoBehaviour {
     void Start()
     {
         scoreCountFlg = false;
-        scoreDisplay = 0;
+        ScoreManager.Instance.ScoreReset();
     }
 
     void Update ()
@@ -40,8 +39,8 @@ public class Score : MonoBehaviour {
             score = Enemy.memoryTime;
             nowScore = maxScore - (score * 10);
 
-            scoreDisplay += nowScore;
-            test.text = Mathf.FloorToInt(scoreDisplay).ToString();
+            ScoreManager.Instance.Score += nowScore;
+            test.text = Mathf.FloorToInt(ScoreManager.Instance.Score).ToString();
 
             scoreCountFlg = false;
             scoreFlg = false;

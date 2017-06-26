@@ -22,6 +22,8 @@ public class Wave : MonoBehaviour {
 
     public Slider slider;
 
+    public static bool limitResetFlg = false; //WaveMove
+
     //-----------------------------------------
     // private
     //-----------------------------------------
@@ -54,7 +56,7 @@ public class Wave : MonoBehaviour {
         
         while(true)
         {
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(1.0f);
 
             //５回ウェーブ来るまで続ける
             if (limitWave > nowWave)
@@ -73,10 +75,12 @@ public class Wave : MonoBehaviour {
                     yield return new WaitForEndOfFrame();
                 }
 
+
                 //子オブジェクトが０になったらウェーブを削除
                 Destroy(waves);
 
                 WaveMove.WaveMoveEnd = false;
+                limitResetFlg = true;
 
                 //ウェーブの配列の要素
                 waveNo++;
@@ -91,7 +95,6 @@ public class Wave : MonoBehaviour {
                     yield return new WaitForSeconds(1.0f);
                     endImage.SetBool("endFlg", true);
 
-
                     yield return new WaitForSeconds(2.0f);
                     Move.soldierStartFlg = true;
                     AudioManager.Instance.PlaySE("mainEnd");
@@ -100,7 +103,6 @@ public class Wave : MonoBehaviour {
                     SceneManager.LoadScene("result");
                 }
                 
-
                 //ウェーブ数が配列の要素数を超えたらウェーブ数を０に戻す
                 if (wave.Length <= waveNo)
                 {

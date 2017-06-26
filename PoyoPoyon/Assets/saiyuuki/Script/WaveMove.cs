@@ -22,12 +22,12 @@ public class WaveMove : MonoBehaviour {
     {
         if (hurdleFlg) waveMove = 2.5f;
         else if (hurdleFlg == false) waveMove = 1.5f;
-        LimitTime = MaxLimit;
+
+        //LimitTime = MaxLimit;
     }
 
     void Update()
     {
-
         wavePos = transform.position;
         wavePos.y -= waveMove * Time.deltaTime;
 
@@ -48,23 +48,21 @@ public class WaveMove : MonoBehaviour {
 
             if (LimitTime <= 0)
             {
+                LimitTime = MaxLimit;
                 weveEnd = true;
             }
         }
 
         transform.position = wavePos;
 
-
         if (transform.localPosition.y < -border && hurdleFlg)
         {
             Destroy(gameObject);
-
         }
 
         if (transform.position.y < -border && hurdleFlg == false)
         {
-            //時間進行リセット
-            LimitTime = MaxLimit;
+            Wave.limitResetFlg = true;
             weveEnd = false;
             WaveMoveEnd = false;
 
@@ -75,5 +73,13 @@ public class WaveMove : MonoBehaviour {
             }
         }
 
+        Debug.Log(LimitTime);
+
+        if (Wave.limitResetFlg == true)
+        {
+            //時間進行リセット
+            LimitTime = MaxLimit;
+            Wave.limitResetFlg = false;
+        }
     }
 }
