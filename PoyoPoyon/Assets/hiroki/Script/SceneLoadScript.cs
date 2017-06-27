@@ -7,11 +7,14 @@ public class SceneLoadScript : MonoBehaviour
 {
 
     public int SceneSpeed = 4;
+    bool filstTouch;
 
     void Start()
     {
         AudioManager.Instance.PlayBGM("title");
         Move.soldierStartFlg = false;
+
+        filstTouch = true;
     }
     //void Update()
     //{
@@ -27,6 +30,7 @@ public class SceneLoadScript : MonoBehaviour
     //    }
     //}
 
+    //タップした場所にUIオブジェクトがあるかどうか
     private bool IsPointerOverUIObject()
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
@@ -44,10 +48,13 @@ public class SceneLoadScript : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (!IsPointerOverUIObject())
+            // タップ位置に何も存在しない
+            if (!IsPointerOverUIObject() && filstTouch)
             {
-                // タップ位置に何も存在しない
+                filstTouch = false;
+
                 Move.soldierStartFlg = true;
+
                 AudioManager.Instance.PlaySE("iyoo");
                 Invoke("title", SceneSpeed);
                 AudioManager.Instance.FadeOutBGM();

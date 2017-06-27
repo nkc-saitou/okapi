@@ -45,7 +45,6 @@ public class WaveMove : MonoBehaviour {
 
             if (WaveMoveEnd == true)
             {
-                Debug.Log(LimitTime);
                 LimitTime -= Time.deltaTime;
                 timeScaleX = LimitTime / MaxLimit;
             }

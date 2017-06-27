@@ -1,17 +1,24 @@
 fileFormatVersion: 2
-guid: 782aa0d7a4a12be43b7715f93ddef5f2
-timeCreated: 1496139232
+guid: 695e96bd4d8e5c94482e02ec9e81d738
+timeCreated: 1498464077
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: newOkapi_Left_0
-    21300002: newOkapi_Left_1
-    21300004: newOkapi_Left_2
-    21300006: newOkapi_Left_3
-    21300008: newOkapi_Left_4
-    21300010: newOkapi_Left_5
-    21300012: newOkapi_Left_6
-    21300014: newOkapi_Left_7
+    21300000: mozi_0
+    21300002: mozi_1
+    21300004: mozi_2
+    21300006: mozi_3
+    21300008: mozi_4
+    21300010: mozi_5
+    21300012: mozi_6
+    21300014: mozi_7
+    21300016: mozi_8
+    21300018: mozi_9
+    21300020: mozi_10
+    21300022: mozi_11
+    21300024: mozi_12
+    21300026: mozi_13
+    21300028: mozi_14
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -118,104 +125,195 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: newOkapi_Left_0
+      name: mozi_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 302
-        width: 114
-        height: 205
+        x: 37
+        y: 389
+        width: 142
+        height: 76
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newOkapi_Left_1
+      name: mozi_1
       rect:
         serializedVersion: 2
-        x: 140
-        y: 305
-        width: 110
-        height: 198
+        x: 41
+        y: 291
+        width: 131
+        height: 67
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newOkapi_Left_2
+      name: mozi_2
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 177
+        width: 178
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mozi_3
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 91
+        width: 37
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mozi_4
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 88
+        width: 31
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mozi_5
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 88
+        width: 32
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mozi_6
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 93
+        width: 35
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mozi_7
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 95
+        width: 36
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mozi_8
       rect:
         serializedVersion: 2
         x: 260
-        y: 303
-        width: 108
-        height: 200
+        y: 97
+        width: 33
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newOkapi_Left_3
+      name: mozi_9
       rect:
         serializedVersion: 2
-        x: 370
-        y: 311
-        width: 108
-        height: 194
+        x: 298
+        y: 96
+        width: 31
+        height: 52
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newOkapi_Left_4
+      name: mozi_10
       rect:
         serializedVersion: 2
-        x: 8
-        y: 62
-        width: 115
-        height: 203
+        x: 335
+        y: 98
+        width: 30
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newOkapi_Left_5
+      name: mozi_11
       rect:
         serializedVersion: 2
-        x: 140
-        y: 66
-        width: 107
-        height: 199
+        x: 369
+        y: 97
+        width: 36
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newOkapi_Left_6
+      name: mozi_12
       rect:
         serializedVersion: 2
-        x: 258
-        y: 66
-        width: 107
-        height: 202
+        x: 410
+        y: 97
+        width: 29
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newOkapi_Left_7
+      name: mozi_13
       rect:
         serializedVersion: 2
-        x: 376
-        y: 75
-        width: 110
-        height: 194
+        x: 254
+        y: 262
+        width: 165
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mozi_14
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 381
+        width: 281
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
