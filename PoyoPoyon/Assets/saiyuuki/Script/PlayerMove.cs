@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour
     //-------------------------------------
 
     const float FLICK_DIRECTION = 50; //フリックする距離
-    const float FLICK_MOVE = 2.0f;
+    const float FLICK_MOVE = 5.0f;
 
     //-------------------------------------
     // public

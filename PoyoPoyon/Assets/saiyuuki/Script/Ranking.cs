@@ -32,8 +32,6 @@ public class Ranking : MonoBehaviourExtension {
             scoreText.text = Mathf.FloorToInt(ScoreManager.Instance.Score).ToString();
         });
 
-        Debug.Log()
-
         //}
     }
 
