@@ -15,7 +15,8 @@ public class RankingImage : MonoBehaviour {
 
     int[] rank = new int[3];
 
-    Color a_color;
+    Color color; //a値１
+    Color color_a; //a値０
 
     public List<int> filstLis = new List<int>();
     public List<int> secondLis = new List<int>();
@@ -23,7 +24,8 @@ public class RankingImage : MonoBehaviour {
 
     void Start()
     {
-
+        color.a = 1;
+        color_a.a = 0;
     }
 
     void Update ()
@@ -40,15 +42,20 @@ public class RankingImage : MonoBehaviour {
     {
         rank[0] = Mathf.FloorToInt(rankingDate[RankingStageNo.rankingStageNo].score[0]);
 
-        if (rank[0] <= 10)
+        if (rank[0] < 10)
         {
-            a_color.a = 0;
-            filstNUMImage[1].color = a_color;
+            filstNUMImage[1].color = color_a;
+            filstNUMImage[2].color = color_a;
+        }
+        else if(rank[0] >= 10 && rank[0] < 100)
+        {
+            filstNUMImage[1].color = color;
+            filstNUMImage[2].color = color_a;
         }
         else
         {
-            a_color.a = 1;
-            filstNUMImage[1].color = a_color;
+            filstNUMImage[1].color = color;
+            filstNUMImage[2].color = color;
         }
 
         filstLis = new List<int>();
@@ -76,15 +83,20 @@ public class RankingImage : MonoBehaviour {
     {
         rank[1] = Mathf.FloorToInt(rankingDate[RankingStageNo.rankingStageNo].score[1]);
 
-        if (rank[1] <= 10)
+        if (rank[1] < 10)
         {
-            a_color.a = 0;
-            secondNIMImage[1].color = a_color;
+            secondNIMImage[1].color = color_a;
+            secondNIMImage[2].color = color_a;
+        }
+        else if (rank[1] >= 10 && rank[1] < 100)
+        {
+            secondNIMImage[1].color = color;
+            secondNIMImage[2].color = color_a;
         }
         else
         {
-            a_color.a = 1;
-            secondNIMImage[1].color = a_color;
+            secondNIMImage[1].color = color;
+            secondNIMImage[2].color = color;
         }
 
         secondLis = new List<int>();
@@ -109,15 +121,20 @@ public class RankingImage : MonoBehaviour {
     {
         rank[2] = Mathf.FloorToInt(rankingDate[RankingStageNo.rankingStageNo].score[2]);
 
-        if (rank[2] <= 10)
+        if (rank[2] < 10)
         {
-            a_color.a = 0;
-            thildNUMImage[1].color = a_color;
+            thildNUMImage[1].color = color_a;
+            thildNUMImage[2].color = color_a;
+        }
+        else if (rank[2] >= 10 && rank[2] < 100)
+        {
+            thildNUMImage[1].color = color;
+            thildNUMImage[2].color = color_a;
         }
         else
         {
-            a_color.a = 1;
-            thildNUMImage[1].color = a_color;
+            thildNUMImage[1].color = color;
+            thildNUMImage[2].color = color;
         }
 
         thildLis = new List<int>();

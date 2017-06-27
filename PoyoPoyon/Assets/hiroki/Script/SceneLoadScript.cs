@@ -6,7 +6,8 @@ using System.Collections.Generic;
 public class SceneLoadScript : MonoBehaviour
 {
 
-    public int SceneSpeed = 4;
+    public float SceneSpeed = 0.5f;
+    public float loadSpeed = 0.5f;
     bool filstTouch;
 
     void Start()
@@ -56,7 +57,9 @@ public class SceneLoadScript : MonoBehaviour
                 Move.soldierStartFlg = true;
 
                 AudioManager.Instance.PlaySE("iyoo");
-                Invoke("title", SceneSpeed);
+                //FadeManager.Instance.LoadScene("stageSelect",SceneSpeed);
+                Invoke("title", loadSpeed);
+
                 AudioManager.Instance.FadeOutBGM();
             }
         }
@@ -64,6 +67,7 @@ public class SceneLoadScript : MonoBehaviour
 
     void title()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("stageSelect");
+        FadeManager.Instance.LoadScene("stageSelect",SceneSpeed);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("stageSelect");
     }
 }

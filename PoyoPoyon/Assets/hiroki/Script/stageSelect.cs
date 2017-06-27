@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class stageSelect : MonoBehaviour
 {
     public int stageNo;
+    public float sceneLoadSpeed = 5.0f;
 
     public static bool filstTouch;
     //public static int rankingStageNo;
