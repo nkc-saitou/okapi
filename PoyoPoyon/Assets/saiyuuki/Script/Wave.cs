@@ -24,6 +24,8 @@ public class Wave : MonoBehaviour {
 
     public static bool limitResetFlg = false; //WaveMove
 
+    public float fadetime;  //fademanger
+
     //-----------------------------------------
     // private
     //-----------------------------------------
@@ -100,7 +102,7 @@ public class Wave : MonoBehaviour {
                     AudioManager.Instance.PlaySE("mainEnd");
 
                     yield return new WaitForSeconds(3.0f);
-                    SceneManager.LoadScene("result");
+                    FadeManager.Instance.LoadScene("result", fadetime);     //fademanager
                 }
                 
                 //ウェーブ数が配列の要素数を超えたらウェーブ数を０に戻す

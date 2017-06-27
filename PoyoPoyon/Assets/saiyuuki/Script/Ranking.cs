@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Ranking : MonoBehaviour {
+public class Ranking : MonoBehaviourExtension {
 
-    const int RANKING_NUM = 3;
+    //const int RANKING_NUM = 3;
 
     //public RankingDate[] rankingDate;
     //public Text[] rankLabel = new Text[RANKING_NUM];
@@ -26,7 +26,14 @@ public class Ranking : MonoBehaviour {
         //{
             //SaveRanking(ScoreManager.Instance.Score);
             ScoreManager.Instance.ScoreSetRanking();
+
+        WaitAfter(0.1f, () =>
+        {
             scoreText.text = Mathf.FloorToInt(ScoreManager.Instance.Score).ToString();
+        });
+
+        Debug.Log()
+
         //}
     }
 

@@ -21,8 +21,8 @@ public class PlayerMove : MonoBehaviour
 
     public static bool[] FlickFlg = new bool[2]; //0がRight,1がLeft
     public static bool[] flickController = new bool[2];
-    public static string flickState_R = "upDown";
-    public static string flickState_L = "upDown";
+    public static string flickState_R;
+    public static string flickState_L;
 
     //-------------------------------------
     // private
@@ -45,6 +45,8 @@ public class PlayerMove : MonoBehaviour
     float[] disX = new float[2];
     float[] disY = new float[2];
 
+    bool filstTouchFlg;
+
     ClickState clickState = 0;
     //Right_SoldierState rightState = 0;
 
@@ -66,56 +68,67 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
-        for(int i = 0; i<FlickFlg.Length; i++)
+        filstTouchFlg = false;
+
+        for (int i = 0; i < FlickFlg.Length; i++)
         {
             FlickFlg[i] = false;
             flickController[i] = true;
         }
-            startSoldierPos[0] = new Vector2(6.1f,soldier[0].transform.position.y);
-            startSoldierPos[1] = new Vector2(-6.1f, soldier[1].transform.position.y);
+
+        StartCoroutine(WaitTime());
+
+        startSoldierPos[0] = new Vector2(6.1f, soldier[0].transform.position.y);
+        startSoldierPos[1] = new Vector2(-6.1f, soldier[1].transform.position.y);
+
+        flickState_R = "upDown";
+        flickState_L = "upDown";
     }
 
     void Update()
     {
-        //TouchTest();
-        if (Input.touchSupported)
+        if (filstTouchFlg)
         {
-            foreach (Touch t in Input.touches)
+            //TouchTest();
+            if (Input.touchSupported)
             {
-                switch (t.phase)
+                foreach (Touch t in Input.touches)
                 {
-                    //タッチしたとき
-                    case TouchPhase.Began:
-                        Touch(t);
+                    switch (t.phase)
+                    {
+                        //タッチしたとき
+                        case TouchPhase.Began:
+                            Touch(t);
+                            break;
+
+                        //タッチされているとき
+                        case TouchPhase.Moved:
+                            TouchDrag(t);
+                            break;
+
+                        //タッチされていないとき
+                        case TouchPhase.Ended:
+                            TouchEnd(t);
+                            break;
+                    }
+                }
+            }
+
+            else
+            {
+                switch (clickState)
+                {
+                    case ClickState.Click:
+                        MouseClick();
                         break;
 
-                    //タッチされているとき
-                    case TouchPhase.Moved:
-                        TouchDrag(t);
-                        break;
-
-                    //タッチされていないとき
-                    case TouchPhase.Ended:
-                        TouchEnd(t);
+                    case ClickState.Drag:
+                        MouseDrag();
                         break;
                 }
             }
+            RightSoldierMoveState();
         }
-
-        else
-        {
-            switch (clickState)
-            {
-                case ClickState.Click:
-                    MouseClick();
-                    break;
-
-                case ClickState.Drag:
-                    MouseDrag();
-                    break;
-            }
-        }
-        RightSoldierMoveState();
     }
 
     //--------------------------------------------
@@ -320,6 +333,13 @@ public class PlayerMove : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    IEnumerator WaitTime()
+    {
+        yield return new WaitForSeconds(1.0f);
+        filstTouchFlg = true;
+
     }
 
 //-----------------------------------------------------------

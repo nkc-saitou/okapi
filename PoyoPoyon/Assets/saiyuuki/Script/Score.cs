@@ -28,6 +28,7 @@ public class Score : MonoBehaviour {
     {
         scoreCountFlg = false;
         ScoreManager.Instance.ScoreReset();
+        ScoreManager.Instance.DoseScoreReset();
     }
 
     void Update ()
@@ -37,9 +38,9 @@ public class Score : MonoBehaviour {
         if (scoreCountFlg)
         {
             score = Enemy.memoryTime;
-            nowScore = maxScore - (score * 10);
+            ScoreManager.Instance.DoseScore = maxScore - (score * 10);
 
-            ScoreManager.Instance.Score += nowScore;
+            ScoreManager.Instance.Score += ScoreManager.Instance.DoseScore;
             test.text = Mathf.FloorToInt(ScoreManager.Instance.Score).ToString();
 
             scoreCountFlg = false;

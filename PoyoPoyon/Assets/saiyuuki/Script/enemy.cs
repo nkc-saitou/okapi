@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviourExtension
 {
     //public Text scoreText;
     public static float memoryTime;
@@ -61,6 +61,7 @@ public class Enemy : MonoBehaviour
         if(smokeFlg)
         {
             effectSmoke = Instantiate((GameObject)Resources.Load("Prefab/Smoke"), gameObject.transform);
+
             smokeFlg = false;
         }
     }

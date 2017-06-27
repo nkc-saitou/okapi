@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public class stageSelect : MonoBehaviour
 {
     public int stageNo;
-    public float sceneLoadSpeed = 5.0f;
 
     public static bool filstTouch;
     //public static int rankingStageNo;
@@ -16,7 +15,7 @@ public class stageSelect : MonoBehaviour
         filstTouch = true;
     }
 
-    public void SceneLoad()
+    public void SceneLoad(float fadetime)
     {
         if (filstTouch)
         {
@@ -28,34 +27,34 @@ public class stageSelect : MonoBehaviour
             //アニメーション再生
             Move.soldierStartFlg = true;
 
-            StartCoroutine(waitTime());
             AudioManager.Instance.PlaySE("don");
-            AudioManager.Instance.FadeOutBGM();
+
+            StartCoroutine(waitTime(fadetime));
+
         }
     }
 
-    IEnumerator waitTime()
+    IEnumerator waitTime(float fadetime)
     {
         yield return new WaitForSeconds(2.0f);
-
 
         switch (stageNo)
         {
             case 0:
-                SceneManager.LoadScene("main");
+                FadeManager.Instance.LoadScene("main", fadetime);
                 RankingStageNo.rankingStageNo = 0;
                 break;
 
             case 1:
-                SceneManager.LoadScene("main");
+                FadeManager.Instance.LoadScene("main", fadetime);
                 RankingStageNo.rankingStageNo = 1;
                 break;
 
             case 2:
-                SceneManager.LoadScene("main");
+                FadeManager.Instance.LoadScene("main", fadetime);
                 RankingStageNo.rankingStageNo = 2;
                 break;
-
         }
+        Debug.Log(RankingStageNo.rankingStageNo);
     }
 }
