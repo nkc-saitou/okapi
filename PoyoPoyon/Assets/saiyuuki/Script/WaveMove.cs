@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WaveMove : MonoBehaviour {
 
-    const float border = 10;
+    const float border = 7;
 
     public static bool WaveMoveEnd;
 

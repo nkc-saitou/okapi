@@ -41,7 +41,7 @@ public class stageSelect : MonoBehaviour
         switch (stageNo)
         {
             case 0:
-                FadeManager.Instance.LoadScene("main", fadetime);
+                FadeManager.Instance.LoadScene("stage3", fadetime);
                 RankingStageNo.rankingStageNo = 0;
                 break;
 
