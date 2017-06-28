@@ -7,11 +7,13 @@ public class backTitle : MonoBehaviour
 
     public void TitleLoad()
     {
-        SceneManager.LoadScene("title");
+        FadeManager.Instance.LoadScene("title", 1.0f);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("title");
     }
 
     public void StageSelectLoad()
     {
-        SceneManager.LoadScene("stageSelect");
+        FadeManager.Instance.LoadScene("stageSelect", 1.0f);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("stageSelect");
     }
 }
