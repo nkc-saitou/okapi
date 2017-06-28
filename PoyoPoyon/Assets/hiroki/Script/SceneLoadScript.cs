@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 
 public class SceneLoadScript : MonoBehaviour
 {
@@ -47,20 +48,24 @@ public class SceneLoadScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        //スプラッシュ画面が終了したらtrueを返す
+        if (SplashScreen.isFinished)
         {
-            // タップ位置に何も存在しない
-            if (!IsPointerOverUIObject() && filstTouch)
+            if (Input.GetMouseButtonDown(0))
             {
-                filstTouch = false;
+                // タップ位置に何も存在しない
+                if (!IsPointerOverUIObject() && filstTouch)
+                {
+                    filstTouch = false;
 
-                Move.soldierStartFlg = true;
+                    Move.soldierStartFlg = true;
 
-                AudioManager.Instance.PlaySE("iyoo");
-                //FadeManager.Instance.LoadScene("stageSelect",SceneSpeed);
-                Invoke("title", 2);
+                    AudioManager.Instance.PlaySE("iyoo");
+                    //FadeManager.Instance.LoadScene("stageSelect",SceneSpeed);
+                    Invoke("title", 2);
 
-                AudioManager.Instance.FadeOutBGM();
+                    AudioManager.Instance.FadeOutBGM();
+                }
             }
         }
     }

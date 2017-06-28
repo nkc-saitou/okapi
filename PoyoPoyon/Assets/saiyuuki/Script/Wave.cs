@@ -22,6 +22,8 @@ public class Wave : MonoBehaviour {
 
     public Slider slider;
 
+    public GameObject effect;
+
     public static bool limitResetFlg = false; //WaveMove
 
     public float fadetime;  //fademanger
@@ -38,6 +40,7 @@ public class Wave : MonoBehaviour {
 	void Start ()
     {
         StartCoroutine(WaveStart());
+        effect.SetActive(false);
     }
 
     void Update()
@@ -92,6 +95,7 @@ public class Wave : MonoBehaviour {
                 //ウェーブの上限数がきたらリザルトシーンに遷移
                 if (limitWave == nowWave)
                 {
+                    effect.SetActive(true);
                     AudioManager.Instance.FadeOutBGM();
 
                     yield return new WaitForSeconds(1.0f);

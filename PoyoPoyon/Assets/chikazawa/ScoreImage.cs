@@ -13,17 +13,21 @@ public class ScoreImage : MonoBehaviour {
 
     int score;
 
-    Color a_color;
+    Color color_a;
+    Color color;
 
     public List<int> Lis = new List<int>();
 
     // Use this for initialization
-    void Start () {
-		
+    void Start ()
+    {
+        color_a.a = 0;
+        color.a = 1;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         FilstRankingImage();
 
     }
@@ -32,15 +36,20 @@ public class ScoreImage : MonoBehaviour {
     {
         score = Mathf.FloorToInt(ScoreManager.Instance.Score);
 
-        if (score <= 10)
+        if (score < 10)
         {
-            a_color.a = 0;
-            scoreNUMImage[1].color = a_color;
+            scoreNUMImage[1].color = color_a;
+            scoreNUMImage[2].color = color_a;
+        }
+        else if (score >= 10 && score < 100)
+        {
+            scoreNUMImage[1].color = color;
+            scoreNUMImage[2].color = color_a;
         }
         else
         {
-            a_color.a = 1;
-            scoreNUMImage[1].color = a_color;
+            scoreNUMImage[1].color = color;
+            scoreNUMImage[2].color = color;
         }
 
         Lis = new List<int>();
@@ -54,10 +63,14 @@ public class ScoreImage : MonoBehaviour {
             Lis.Add(score);
         }
 
-
         for (int i = 0; i < Lis.Count; i++)
         {
             scoreNUMImage[i].sprite = scoreNum[Lis[i]];
+        }
+
+        if (Lis.Count == 0)
+        {
+            scoreNUMImage[0].sprite = scoreNum[0];
         }
     }
 

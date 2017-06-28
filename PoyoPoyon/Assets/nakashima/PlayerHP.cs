@@ -8,6 +8,12 @@ public class PlayerHP : MonoBehaviour
     public GameObject[] HP;
     int hpNo; //hp配列の番号
 
+    public int soldierNo;
+
+    public GameObject effect;
+
+    Animator animator;
+
     public Animator endImage;
 
     bool filstGameOverFlg;
@@ -20,7 +26,11 @@ public class PlayerHP : MonoBehaviour
         }
 
         filstGameOverFlg = true;
-	}
+        animator = GetComponent<Animator>();
+
+        effect.SetActive(false);
+
+    }
 
 	void Update ()
     {
@@ -38,16 +48,35 @@ public class PlayerHP : MonoBehaviour
         {
             if (hpNo < HP.Length)
             {
-                HP[hpNo].SetActive(true);
-                hpNo++;
+                if (PlayerMove.flickState_R != "returnMove" && soldierNo == 1)
+                {
+                    HP[hpNo].SetActive(true);
+                    StartCoroutine(Damager());
+                    hpNo++;
+                }
+                else if(PlayerMove.flickState_L != "returnMove" && soldierNo == 0)
+                {
+                    HP[hpNo].SetActive(true);
+                    StartCoroutine(Damager());
+                    hpNo++;
+                }
             }
         }
+    }
+
+    IEnumerator Damager()
+    {
+        animator.SetBool("Damage", true);
+
+        yield return new WaitForSeconds(1.0f);
+
+        animator.SetBool("Damage", false);
     }
 
     IEnumerator GameOver()
     {
         //AudioManager.Instance.FadeOutBGM();
-
+        effect.SetActive(true);
         AudioManager.Instance.FadeOutBGM();
 
         yield return new WaitForSeconds(1.0f);

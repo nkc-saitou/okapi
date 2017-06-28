@@ -12,7 +12,7 @@ public class Score : MonoBehaviour {
     public static bool scoreCountFlg;
     float nowScore;
 
-    public Text test;
+    //public Text test;
 
     //-------------------------------------
     // private
@@ -41,7 +41,7 @@ public class Score : MonoBehaviour {
             ScoreManager.Instance.DoseScore = maxScore - (score * 10);
 
             ScoreManager.Instance.Score += ScoreManager.Instance.DoseScore;
-            test.text = Mathf.FloorToInt(ScoreManager.Instance.Score).ToString();
+            //test.text = Mathf.FloorToInt(ScoreManager.Instance.Score).ToString();
 
             scoreCountFlg = false;
             scoreFlg = false;

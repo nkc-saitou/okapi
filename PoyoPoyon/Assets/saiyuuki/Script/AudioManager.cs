@@ -114,7 +114,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     {
         if(!isFadeOut)
         {
-            attachBGMSource.volume = 0.4f;
+            attachBGMSource.volume = 0.2f;
             return;
         }
 

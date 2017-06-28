@@ -20,12 +20,12 @@ public class Ranking : MonoBehaviourExtension {
 
     //public bool setRankingFlg = true; //saveならtrue,loadならfalse
 
-	void Start ()
+    void Start()
     {
         //if (setRankingFlg == true)
         //{
-            //SaveRanking(ScoreManager.Instance.Score);
-            ScoreManager.Instance.ScoreSetRanking();
+        //SaveRanking(ScoreManager.Instance.Score);
+        ScoreManager.Instance.ScoreSetRanking();
 
         WaitAfter(0.1f, () =>
         {

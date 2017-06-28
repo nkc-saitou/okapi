@@ -74,6 +74,11 @@ public class RankingImage : MonoBehaviour {
         {
             filstNUMImage[i].sprite = scoreNum[filstLis[i]];
         }
+
+        if(filstLis.Count == 0)
+        {
+            filstNUMImage[0].sprite = scoreNum[0];
+        }
     }
 
     //--------------------------------------
@@ -114,6 +119,12 @@ public class RankingImage : MonoBehaviour {
         for (int i = 0; i < secondLis.Count; i++)
         {
             secondNIMImage[i].sprite = scoreNum[secondLis[i]];
+
+        }
+
+        if (filstLis.Count == 0)
+        {
+            secondNIMImage[0].sprite = scoreNum[0];
         }
     }
 
@@ -151,6 +162,11 @@ public class RankingImage : MonoBehaviour {
         for (int i = 0; i < thildLis.Count; i++)
         {
             thildNUMImage[i].sprite = scoreNum[thildLis[i]];
+        }
+
+        if (filstLis.Count == 0)
+        {
+            thildNUMImage[0].sprite = scoreNum[0];
         }
     }
 }

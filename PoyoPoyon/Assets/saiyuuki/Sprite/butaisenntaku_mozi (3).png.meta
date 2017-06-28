@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: bc687bb1e50022e48bb0a32379f89693
-timeCreated: 1498213264
+guid: 0275ca2706e8a4f448b102f379ed3765
+timeCreated: 1498620704
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: butaisenntaku_mozi_0
-    21300002: butaisenntaku_mozi_1
-    21300004: butaisenntaku_mozi_2
-    21300006: butaisenntaku_mozi_3
-    21300008: butaisenntaku_mozi_4
-    21300010: butaisenntaku_mozi_5
-    21300012: butaisenntaku_mozi_6
+    21300000: butaisenntaku_mozi (3)_0
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -117,91 +111,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: butaisenntaku_mozi_0
+      name: butaisenntaku_mozi (3)_0
       rect:
         serializedVersion: 2
-        x: 260
-        y: 375
-        width: 270
+        x: 255
+        y: 374
+        width: 283
         height: 71
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: butaisenntaku_mozi_1
-      rect:
-        serializedVersion: 2
-        x: 56
-        y: 220
-        width: 190
-        height: 148
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: butaisenntaku_mozi_2
-      rect:
-        serializedVersion: 2
-        x: 305
-        y: 220
-        width: 190
-        height: 147
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: butaisenntaku_mozi_3
-      rect:
-        serializedVersion: 2
-        x: 549
-        y: 220
-        width: 189
-        height: 148
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: butaisenntaku_mozi_4
-      rect:
-        serializedVersion: 2
-        x: 57
-        y: 59
-        width: 190
-        height: 151
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: butaisenntaku_mozi_5
-      rect:
-        serializedVersion: 2
-        x: 306
-        y: 58
-        width: 187
-        height: 149
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: butaisenntaku_mozi_6
-      rect:
-        serializedVersion: 2
-        x: 550
-        y: 60
-        width: 188
-        height: 148
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
