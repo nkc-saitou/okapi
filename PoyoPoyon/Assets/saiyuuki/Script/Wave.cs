@@ -106,10 +106,9 @@ public class Wave : MonoBehaviour {
                     AudioManager.Instance.PlaySE("mainEnd");
 
                     yield return new WaitForSeconds(3.0f);
-                    FadeManager.Instance.LoadScene("result", 1.0f);
-                    //UnityEngine.SceneManagement.SceneManager.LoadScene("stageSelect");   //fademanager
+                    FadeManager.Instance.LoadScene("result", fadetime);     //fademanager
                 }
-
+                
                 //ウェーブ数が配列の要素数を超えたらウェーブ数を０に戻す
                 if (wave.Length <= waveNo)
                 {
