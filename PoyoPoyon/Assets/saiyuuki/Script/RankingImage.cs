@@ -22,6 +22,9 @@ public class RankingImage : MonoBehaviour {
     public List<int> secondLis = new List<int>();
     public List<int> thildLis = new List<int>();
 
+    public Image stageImage;
+    public Sprite[] stageRankingImage; //0初級
+
     void Start()
     {
         color.a = 1;
@@ -33,6 +36,8 @@ public class RankingImage : MonoBehaviour {
         FilstRankingImage();
         SecondRankingImage();
         ThildRankingImage();
+
+        stageImage.sprite = stageRankingImage[RankingStageNo.rankingStageNo];
     }
 
     //--------------------------------------------

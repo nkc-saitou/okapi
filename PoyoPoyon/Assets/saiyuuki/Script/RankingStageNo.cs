@@ -8,13 +8,13 @@ public class RankingStageNo : MonoBehaviour {
     public int buttonNo;
     public static int rankingStageNo;
 
-    public Image stageImage;
-    public Sprite stageRankingImage; //0初級
+    //public Image stageImage;
+    //public Sprite stageRankingImage; //0初級
 
 	void Start ()
     {
-
-	}
+        //stageImage.sprite = stageRankingImage;
+    }
 	
 	void Update ()
     {
@@ -23,7 +23,7 @@ public class RankingStageNo : MonoBehaviour {
 
     public void StageRankings()
     {
-        stageImage.sprite = stageRankingImage;
+        //stageImage.sprite = stageRankingImage;
 
         switch (buttonNo)
         {

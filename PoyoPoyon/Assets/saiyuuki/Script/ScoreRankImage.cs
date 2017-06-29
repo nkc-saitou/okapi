@@ -9,28 +9,36 @@ public class ScoreRankImage : MonoBehaviour {
 
     public Sprite[] rankImage; //0が一番悪い
 
+    bool filstFlg;
+
 	void Start ()
     {
         scoreRank = GetComponent<SpriteRenderer>();
+        filstFlg = true;
 	}
 	
 	void Update ()
     {
-		if(ScoreManager.Instance.DoseScore < 1)
+        if (filstFlg)
         {
-            scoreRank.sprite = rankImage[0];
-        }
-        else if(ScoreManager.Instance.DoseScore >= 1 && ScoreManager.Instance.DoseScore <=5)
-        {
-            scoreRank.sprite = rankImage[1];
-        }
-        else if(ScoreManager.Instance.DoseScore > 5 && ScoreManager.Instance.DoseScore <=9)
-        {
-            scoreRank.sprite = rankImage[2];
-        }
-        else if(ScoreManager.Instance.DoseScore > 9)
-        {
-            scoreRank.sprite = rankImage[3];
+            if (ScoreManager.Instance.DoseScore < 1)
+            {
+                scoreRank.sprite = rankImage[0];
+            }
+            else if (ScoreManager.Instance.DoseScore >= 1 && ScoreManager.Instance.DoseScore <= 5)
+            {
+                scoreRank.sprite = rankImage[1];
+            }
+            else if (ScoreManager.Instance.DoseScore > 5 && ScoreManager.Instance.DoseScore <= 9)
+            {
+                scoreRank.sprite = rankImage[2];
+            }
+            else if (ScoreManager.Instance.DoseScore > 9)
+            {
+                scoreRank.sprite = rankImage[3];
+            }
+
+            filstFlg = false;
         }
 	}
 }

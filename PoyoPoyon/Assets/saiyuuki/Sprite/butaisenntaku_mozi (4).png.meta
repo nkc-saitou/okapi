@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 9f65c8be2b9ce5d47a5073c8aca35103
-timeCreated: 1498613306
+guid: 17299727db0f4e7488ef24613b26c781
+timeCreated: 1498721843
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: butaisenntaku_mozi (2)_0
-    21300002: butaisenntaku_mozi (2)_1
-    21300004: butaisenntaku_mozi (2)_2
+    21300000: butaisenntaku_mozi (4)_0
+    21300002: butaisenntaku_mozi (4)_1
+    21300004: butaisenntaku_mozi (4)_2
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -113,39 +113,39 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: butaisenntaku_mozi (2)_0
+      name: butaisenntaku_mozi (4)_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 124
-        width: 211
-        height: 206
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: butaisenntaku_mozi (2)_1
-      rect:
-        serializedVersion: 2
-        x: 296
+        x: 46
         y: 126
-        width: 207
-        height: 196
+        width: 196
+        height: 195
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: butaisenntaku_mozi (2)_2
+      name: butaisenntaku_mozi (4)_1
       rect:
         serializedVersion: 2
-        x: 573
-        y: 128
-        width: 189
-        height: 192
+        x: 293
+        y: 124
+        width: 209
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: butaisenntaku_mozi (4)_2
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 125
+        width: 208
+        height: 205
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
