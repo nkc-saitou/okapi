@@ -48,12 +48,12 @@ public class stageSelect : MonoBehaviour
                 break;
 
             case 1:
-                FadeManager.Instance.LoadScene("main", fadetime);
+                FadeManager.Instance.LoadScene("main2", fadetime);
                 RankingStageNo.rankingStageNo = 1;
                 break;
 
             case 2:
-                FadeManager.Instance.LoadScene("main", fadetime);
+                FadeManager.Instance.LoadScene("main3", fadetime);
                 RankingStageNo.rankingStageNo = 2;
                 break;
         }

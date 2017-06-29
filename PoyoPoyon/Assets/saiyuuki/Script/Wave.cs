@@ -48,6 +48,11 @@ public class Wave : MonoBehaviour {
         {
             slider.value = WaveMove.timeScaleX;
         }
+
+        if (limitResetFlg)
+        {
+            slider.value = 1;
+        }
     }
 
     IEnumerator WaveStart()
