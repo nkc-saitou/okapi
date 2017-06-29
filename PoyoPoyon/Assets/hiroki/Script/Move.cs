@@ -4,20 +4,20 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
     public float moveSpeed;
-    public static bool soldierStartFlg;
+    //public static bool soldierStartFlg;
 
     void Start()
     {
-        soldierStartFlg = false;
+        //soldierStartFlg = false;
     }
 
     void Update()
     {
-        if (soldierStartFlg == true)
-        {
+        //if (soldierStartFlg == true)
+        //{
             Vector2 soldierPos = transform.position;
             soldierPos.y += moveSpeed * Time.deltaTime;
             transform.position = soldierPos;
-        }
+        //}
     }
 }

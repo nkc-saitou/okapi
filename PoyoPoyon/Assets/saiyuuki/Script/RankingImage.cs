@@ -122,7 +122,7 @@ public class RankingImage : MonoBehaviour {
 
         }
 
-        if (filstLis.Count == 0)
+        if (secondLis.Count == 0)
         {
             secondNIMImage[0].sprite = scoreNum[0];
         }
@@ -164,7 +164,7 @@ public class RankingImage : MonoBehaviour {
             thildNUMImage[i].sprite = scoreNum[thildLis[i]];
         }
 
-        if (filstLis.Count == 0)
+        if (thildLis.Count == 0)
         {
             thildNUMImage[0].sprite = scoreNum[0];
         }

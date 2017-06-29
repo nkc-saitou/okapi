@@ -10,8 +10,6 @@ public class PlayerHP : MonoBehaviour
 
     public int soldierNo;
 
-    public GameObject effect;
-
     Animator animator;
 
     public Animator endImage;
@@ -27,8 +25,6 @@ public class PlayerHP : MonoBehaviour
 
         filstGameOverFlg = true;
         animator = GetComponent<Animator>();
-
-        effect.SetActive(false);
 
     }
 
@@ -48,13 +44,13 @@ public class PlayerHP : MonoBehaviour
         {
             if (hpNo < HP.Length)
             {
-                if (PlayerMove.flickState_R != "returnMove" && soldierNo == 1)
+                if (PlayerMove.flickState_R != "returnMove" && soldierNo == 0)
                 {
                     HP[hpNo].SetActive(true);
                     StartCoroutine(Damager());
                     hpNo++;
                 }
-                else if(PlayerMove.flickState_L != "returnMove" && soldierNo == 0)
+                else if(PlayerMove.flickState_L != "returnMove" && soldierNo == 1)
                 {
                     HP[hpNo].SetActive(true);
                     StartCoroutine(Damager());
@@ -76,16 +72,15 @@ public class PlayerHP : MonoBehaviour
     IEnumerator GameOver()
     {
         //AudioManager.Instance.FadeOutBGM();
-        effect.SetActive(true);
         AudioManager.Instance.FadeOutBGM();
 
         yield return new WaitForSeconds(1.0f);
         endImage.SetBool("endFlg", true);
 
         yield return new WaitForSeconds(2.0f);
-        Move.soldierStartFlg = true;
+        //Move.soldierStartFlg = true;
         AudioManager.Instance.PlaySE("mainEnd");
-        //AudioManager.Instance.PlaySE("mainEnd");
+        Instantiate(Resources.Load("Prefab/okapiPrefab"));
 
         yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene("gameOver");

@@ -14,7 +14,7 @@ public class SceneLoadScript : MonoBehaviour
     void Start()
     {
         AudioManager.Instance.PlayBGM("title");
-        Move.soldierStartFlg = false;
+        //Move.soldierStartFlg = false;
 
         filstTouch = true;
     }
@@ -58,7 +58,9 @@ public class SceneLoadScript : MonoBehaviour
                 {
                     filstTouch = false;
 
-                    Move.soldierStartFlg = true;
+                    //Move.soldierStartFlg = true;
+
+                    Instantiate(Resources.Load("Prefab/okapiPrefab"));
 
                     AudioManager.Instance.PlaySE("iyoo");
                     //FadeManager.Instance.LoadScene("stageSelect", SceneSpeed);

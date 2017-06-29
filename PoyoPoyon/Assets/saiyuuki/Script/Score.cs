@@ -40,6 +40,8 @@ public class Score : MonoBehaviour {
             score = Enemy.memoryTime;
             ScoreManager.Instance.DoseScore = maxScore - (score * 10);
 
+            if (ScoreManager.Instance.DoseScore < 1) ScoreManager.Instance.DoseScore = 1;
+
             ScoreManager.Instance.Score += ScoreManager.Instance.DoseScore;
             //test.text = Mathf.FloorToInt(ScoreManager.Instance.Score).ToString();
 

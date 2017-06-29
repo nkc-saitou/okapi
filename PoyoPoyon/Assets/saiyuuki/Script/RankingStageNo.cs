@@ -8,15 +8,11 @@ public class RankingStageNo : MonoBehaviour {
     public int buttonNo;
     public static int rankingStageNo;
 
-    public Image[] button_a;
-
-    Color a_color;
-    Color color;
+    public Image stageImage;
+    public Sprite stageRankingImage; //0初級
 
 	void Start ()
     {
-        a_color.a = 0.5f;
-        color.a = 1;
 
 	}
 	
@@ -27,6 +23,8 @@ public class RankingStageNo : MonoBehaviour {
 
     public void StageRankings()
     {
+        stageImage.sprite = stageRankingImage;
+
         switch (buttonNo)
         {
             case 0:

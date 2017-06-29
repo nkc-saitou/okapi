@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class ScoreRankImage : MonoBehaviour {
 
-    public Image scoreRank;
+    SpriteRenderer scoreRank;
 
     public Sprite[] rankImage; //0が一番悪い
 
 	void Start ()
     {
-		
+        scoreRank = GetComponent<SpriteRenderer>();
 	}
 	
 	void Update ()

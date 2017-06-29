@@ -24,8 +24,10 @@ public class stageSelect : MonoBehaviour
             //BGMフェードアウト
             AudioManager.Instance.FadeOutBGM();
 
-            //アニメーション再生
-            Move.soldierStartFlg = true;
+            Instantiate(Resources.Load("Prefab/okapiPrefab"));
+
+            ////アニメーション再生
+            //Move.soldierStartFlg = true;
 
             AudioManager.Instance.PlaySE("don");
 
