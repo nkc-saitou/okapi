@@ -40,6 +40,7 @@ public class WaveMove : MonoBehaviour {
             if (wavePos.y <= 0 && hurdleFlg == false)
             {
                 WaveMoveEnd = true;
+                //timeGauge = true;
                 wavePos.y = 0;
             }
 
