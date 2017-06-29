@@ -7,12 +7,14 @@ public class toRanking : MonoBehaviour {
 
     public void title()
     {
-        SceneManager.LoadScene("ranking");
+        //FadeManager.Instance.LoadScene("ranking", 1.0f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("ranking");
 
     }
 
     public void credit()
     {
-        SceneManager.LoadScene("Credit");
+        //FadeManager.Instance.LoadScene("Credit", 1.0f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Credit");
     }
 }

@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviourExtension
     //public Text scoreText;
     public static float memoryTime;
 
+    //public GameObject scoreRank;
+
     GameObject soldierAttackEffect;
     protected GameObject effectSmoke;
 
@@ -16,6 +18,8 @@ public class Enemy : MonoBehaviourExtension
     bool scoreFlg = false;
     bool smokeFlg = false;
     protected bool weaponFlg = true; //オブジェクトがあったらtrue,既に消えていたらfalse
+
+    public GameObject DethEnemySprite;
 
     List<GameObject> hitList = new List<GameObject>();
 
@@ -98,6 +102,7 @@ public class Enemy : MonoBehaviourExtension
                 if (hitList[1].tag == "rPlayer" || hitList[1].tag == "lPlayer")
                 {
                     Destroy(effectSmoke);
+                    Instantiate((GameObject)Resources.Load("Prefab/ScoreRankPrefab"), DethEnemySprite.transform);
                     weaponFlg = false;
                     EnemySetting();
                 }
@@ -113,6 +118,11 @@ public class Enemy : MonoBehaviourExtension
 
         PlayerMove.flickState_R = "returnMove";
         PlayerMove.flickState_L = "returnMove";
+
+        Vector3 tmp = gameObject.transform.position;
+        gameObject.transform.position = new Vector3(tmp.x, tmp.y, tmp.z);
+        Quaternion q = new Quaternion();
+        Instantiate(DethEnemySprite, tmp, q);
 
         Destroy(gameObject);
     }

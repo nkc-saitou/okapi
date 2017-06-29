@@ -22,7 +22,7 @@ public class Wave : MonoBehaviour {
 
     public Slider slider;
 
-    public GameObject effect;
+    //public GameObject effect;
 
     public static bool limitResetFlg = false; //WaveMove
 
@@ -40,7 +40,6 @@ public class Wave : MonoBehaviour {
 	void Start ()
     {
         StartCoroutine(WaveStart());
-        effect.SetActive(false);
     }
 
     void Update()
@@ -95,20 +94,22 @@ public class Wave : MonoBehaviour {
                 //ウェーブの上限数がきたらリザルトシーンに遷移
                 if (limitWave == nowWave)
                 {
-                    effect.SetActive(true);
                     AudioManager.Instance.FadeOutBGM();
 
                     yield return new WaitForSeconds(1.0f);
                     endImage.SetBool("endFlg", true);
 
                     yield return new WaitForSeconds(2.0f);
-                    Move.soldierStartFlg = true;
+                    //Move.soldierStartFlg = true;
                     AudioManager.Instance.PlaySE("mainEnd");
 
+                    Instantiate(Resources.Load("Prefab/okapiPrefab"));
+
                     yield return new WaitForSeconds(3.0f);
-                    FadeManager.Instance.LoadScene("result", fadetime);     //fademanager
+                    FadeManager.Instance.LoadScene("result", 1.0f);
+                    //UnityEngine.SceneManagement.SceneManager.LoadScene("stageSelect");   //fademanager
                 }
-                
+
                 //ウェーブ数が配列の要素数を超えたらウェーブ数を０に戻す
                 if (wave.Length <= waveNo)
                 {

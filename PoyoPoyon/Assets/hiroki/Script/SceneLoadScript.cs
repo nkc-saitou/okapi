@@ -7,14 +7,14 @@ using UnityEngine.Rendering;
 public class SceneLoadScript : MonoBehaviour
 {
 
-    //public float SceneSpeed = 0.5f;
+    public float SceneSpeed = 2.5f;
     //public float loadSpeed = 0.5f;
     bool filstTouch;
 
     void Start()
     {
         AudioManager.Instance.PlayBGM("title");
-        Move.soldierStartFlg = false;
+        //Move.soldierStartFlg = false;
 
         filstTouch = true;
     }
@@ -58,10 +58,12 @@ public class SceneLoadScript : MonoBehaviour
                 {
                     filstTouch = false;
 
-                    Move.soldierStartFlg = true;
+                    //Move.soldierStartFlg = true;
+
+                    Instantiate(Resources.Load("Prefab/okapiPrefab"));
 
                     AudioManager.Instance.PlaySE("iyoo");
-                    //FadeManager.Instance.LoadScene("stageSelect",SceneSpeed);
+                    //FadeManager.Instance.LoadScene("stageSelect", SceneSpeed);
                     Invoke("title", 2);
 
                     AudioManager.Instance.FadeOutBGM();
@@ -72,7 +74,7 @@ public class SceneLoadScript : MonoBehaviour
 
     void title()
     {
-        //FadeManager.Instance.LoadScene("stageSelect",SceneSpeed);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("stageSelect");
+        FadeManager.Instance.LoadScene("stageSelect", 1.0f);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("stageSelect");
     }
 }
