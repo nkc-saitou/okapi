@@ -67,12 +67,16 @@ public class PlayerFlg : MonoBehaviour {
         {
             if (soldierNo == 0 && PlayerMove.flickState_R != "returnMove" && PlayerMove.flickState_R != "upDown")
             {
-                PlayerMove.flickState_R = "returnMove";
+                //PlayerMove.flickState_R = "returnMove";
+                PlayerMove.flickState_R = "waitTime";
+                StartCoroutine(WaitWeaponTime_R());
             }
 
             if (soldierNo == 1 && PlayerMove.flickState_L != "returnMove" && PlayerMove.flickState_L != "upDown")
             {
-                PlayerMove.flickState_L = "returnMove";
+                //PlayerMove.flickState_L = "returnMove";
+                PlayerMove.flickState_L = "waitTime";
+                StartCoroutine(WaitWeaponTime_L());
             }
         }
     }
@@ -88,4 +92,17 @@ public class PlayerFlg : MonoBehaviour {
         yield return new WaitForSeconds(1.0f);
         if (PlayerMove.flickState_L == "waitTime") PlayerMove.flickState_L = "returnMove";
     }
+
+    IEnumerator WaitWeaponTime_R()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (PlayerMove.flickState_R == "waitTime") PlayerMove.flickState_R = "returnMove";
+    }
+
+    IEnumerator WaitWeaponTime_L()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (PlayerMove.flickState_L == "waitTime") PlayerMove.flickState_L = "returnMove";
+    }
+
 }
